@@ -1,0 +1,80 @@
+.jumbotron {
+  h1 {
+    font-weight: normal;
+    font-size: 30px;
+    img {
+      height: 1em;
+    }
+  }
+}
+
+.hero-unit {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+footer {
+  display: none;
+}
+
+
+ul#urls li.url, #cboxContent .content {
+
+  .thumbnail {
+    border: none;
+    @include box-shadow(none);
+    @include border-radius(0);
+    border-bottom: 3px solid #ccc;
+  }
+
+
+  .images, .video {
+    max-width: 100% !important;
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  &:hover {
+    .score, .meta, .permalink {
+      opacity: 1;
+    }
+  }
+
+}
+
+.meta, .score {
+  display: none;
+}
+
+
+#cboxLoadedContent {
+  border-bottom: 1px solid #ccc;
+
+  h3 {
+    margin-top: 34px;
+  }
+
+  &:before {
+    content: '';
+  }
+
+  .meta, .score {
+    opacity: 1;
+    display: block;
+  }
+
+  .score {
+    right: 20px !important;
+  }
+
+
+}
+
+

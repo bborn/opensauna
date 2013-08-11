@@ -1,0 +1,20 @@
+div.nav {
+  background: #cedce7; /* old browsers */
+  background: -moz-linear-gradient(top, #cedce7 0%, #93A5BC 100%); /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cedce7), color-stop(100%,#93A5BC)); /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#93A5BC',GradientType=0 ); /* ie */
+  padding: 20px;
+  color: #fff;
+  text-shadow: 1px -1px 0px rgba(0,0,0, .5);
+  margin: -10px -10px 0px -10px;
+  box-shadow: 0px 0px 15px #000;
+}
+
+div.nav ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+div.nav ul li {
+  display: inline;
+}

@@ -1,0 +1,10 @@
+.page-header
+  %h1 Manage Subscription
+
+%ul.thumbnails
+  -@plans.each do |plan|  
+    %li.span2
+      .thumbnail
+        =link_to plan.name
+
+

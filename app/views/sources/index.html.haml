@@ -1,0 +1,31 @@
+-if @dashboard
+  %h2 #{@dashboard.name} - Twitter Users
+
+-if @sources.any?
+  %table
+    %tr
+      %th Name
+      %th Score
+      %th
+      %th
+      %th
+
+    - @sources.each do |source|
+      %tr
+        %td= source.name
+        %td= source.score
+        %td= link_to 'Show', [@dashboard, source]
+        %td= link_to 'Edit', edit_dashboard_source_path(@dashboard, source)
+        %td= link_to 'Destroy', [@dashboard, source], :confirm => 'Are you sure?', :method => :delete
+
+
+%h3 Add screen names
+
+- form_tag create_multiple_dashboard_sources_path do
+  .field
+    %label
+      (one per line)
+    %br
+    = text_area_tag :names, '', :size => '40x10'
+  .actions
+    = submit_tag 'Add'

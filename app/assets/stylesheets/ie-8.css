@@ -1,0 +1,14 @@
+.quotes-block q .holder:after{
+	content:' ';
+	bottom:-26px;
+}
+.quotes-block q .holder{z-index:-1;}
+.landing-page #header .navbar-inner{
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a787878', endColorstr='#0a010101',GradientType=0 );
+}
+.carousel-caption{
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc404040', endColorstr='#cc000000',GradientType=0 );
+}
+.content-area .prev-next-block{
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=0 );
+}

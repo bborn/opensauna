@@ -1,0 +1,8 @@
+.panel-area.url{:id => @url.id}
+  %a.btn-close{:href => "#"} Close
+  %h2
+    Share:
+    %a{:href => "#", 'data-panel' => "story"}
+      =truncate @url.title, :length => 40
+
+  =render 'posts/form'

@@ -1,0 +1,31 @@
+.page-header
+  %h1 Scheduled Posts
+
+
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th Image
+      %th
+      %th
+  -@posts.each do |post|
+    %tr
+      %td.span3{:width => "30%"}
+        %strong=link_to post.title, post
+        %br
+        %a{:href => post.url.url}
+          %i.icon-mini.icon-external-link
+          = truncate post.domain_name, :length => 20
+      %td.span7{:width => "30%"}
+        =truncate post.body, :length => 300
+      %td.span1
+        =image_tag post.image, :width => "200px"
+      %td
+        = link_to 'Show', post, :class => "btn"
+        = link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+
+= paginate @posts, :theme => :bootstrap
+
+

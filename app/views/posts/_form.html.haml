@@ -1,0 +1,52 @@
+= bootstrap_form_for @post, :remote => true, :html => {:class => "form-horizontal share-form"} do |f|
+
+  =f.text_field :title, :class => "span5"
+
+  -dashboards = current_user.publishable_dashboards.all
+  =f.collection_select :dashboard_id, dashboards, :id, :name, {:prompt => false }, {:class => "span5" }
+
+  =f.text_area :body, :class => "span6 wysihtml5", :rows => 8
+
+  =f.hidden_field :url_id
+
+  .control-group
+    %label.control-label
+      Images
+    .controls
+      %ul.editImages.thumbnails
+        -@post.images.each do |image|
+          %li
+            .thumbnail
+              %input{:type => 'checkbox', :name => "post[images][]", :value => image, :checked => true}
+                =background_image_tag image, :width => 100, :height => 100
+
+        %li
+
+          %a.btn.filepicker{:style => "width: 90px;"}
+            %i.icon-upload
+            Upload
+
+  =render :partial => "posts/social_publishing"
+
+  .control-group.btn-box
+    .controls
+      = f.submit 'Publish', :disable_with => "Saving ..."
+
+
+:javascript
+  //jcf.customForms.replaceAll();
+  //initInputs();
+
+  $.rich_text_init();
+
+  filepicker.setKey('#{Rails.application.config.filepicker_rails.api_key}');
+
+  jQuery('.filepicker').click(function(){
+    filepicker.pick({
+        services: ['COMPUTER', 'URL', 'IMAGE_SEARCH']
+      },
+      function(FPFile){
+        jQuery("ul.editImages li:last-child").before("<li><div class='thumbnail'><input type='checkbox' name='post[images][]' value='"+FPFile.url+"' checked='true'><img src='"+FPFile.url+"' width='100'/></input></div></li>");
+      }
+    );
+  });

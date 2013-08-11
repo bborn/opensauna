@@ -1,0 +1,22 @@
+.page-header.clearfix
+  %form.form-search{:action => choose_topics_path, 'data-remote' => true}
+    %fieldset
+      = text_field_tag 'q', params[:q], :placeholder => 'Search for a topic', :class => "input-medium search-query"
+      %button.btn.btn-primary{:type=>"submit", 'data-disable-with' => " ... "} Search
+
+  %h1 Choose Interests
+
+
+.well.lead{:class => @user.interests.any? ? '' : "hide"}
+  Once you're done choosing your interests, click #{link_to 'here to continue', connect_to_twitter_guest_path(@user)}.
+
+%ul#topics.cards-list
+  - @topics.each do |t|
+    =render :partial => 'topic', :object => t
+
+
+.choice-buttons.clearfix
+  =link_to 'Clear all', choose_topics_path(:clear_all => true), :remote => true, :method => :post, :class => "btn-clear"
+
+  %a.btn-continue{:href => connect_to_twitter_guest_path(@user)}
+    %span Continue to build your dashboards

@@ -1,0 +1,7 @@
+$.bootstrapGrowl("Thanks!", { type: 'success' })
+
+//$("li#<%= @the_url.id.to_s %> .score .rate").html('<%= @the_url.score_class.capitalize %>');
+
+<%- if params[:score].to_i < 1 %>
+  $("li#<%= @the_url.id.to_s %>").hide();
+<%- end %>

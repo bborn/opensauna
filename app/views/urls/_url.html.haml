@@ -1,0 +1,119 @@
+%li.span4.url{:id => url.id, 'data-url' => url.url}
+  .thumbnail
+    .caption
+      .title
+        %h2
+          %a.link-story{:href => url.url, 'data-panel' => 'story', 'data-urlid' => "##{url.id}", :target=>"_blank"}
+            =raw url.title
+      .source-link
+        %a{:href => "http://#{url.domain_name}", :target => "_blank"}
+          -if url.favicon
+            %img.favicon{:src => url.favicon, :onerror=>"$(this).hide();", :width => 16, :height => 16}
+
+          %span=url.domain_name
+
+        -if params[:debug] && current_user && current_user.admin?
+          .btn.btn-mini{'data-toggle'=>'collapse', 'data-target'=>'#debug_'+url.id} Debug
+
+          .collapse{:id => 'debug_'+url.id}
+            =link_to 'Show url', url_path(url)
+            -ref = UrlReference.where(:dashboard_id => @dashboard.id).where(:url_id => url.id).first
+            %pre=ref.inspect
+
+
+      .text-limiter
+        .limiter-holder
+          %a.link-story
+            -if !url.video_embed.blank?
+              .video
+                =url.video_embed
+
+            -elsif url.image
+              =image_tag('s.png', :style => "background: url(#{url.image}) no-repeat; background-size: cover;", :width => "298px", :height => '150px')
+
+          -if url.body
+            %p.description
+              =truncate strip_tags(url.short_text_for_item), :length => 200
+
+    .share-popups-holder
+      .btn-group.action-buttons
+        %a.btn{href: "/urls/#{url.id}/score?score=1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link GOOD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+          %i.icon-thumbs-up
+        %a.btn{href: "/urls/#{url.id}/score?score=-1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link BAD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+          %i.icon-thumbs-down
+        %button.btn.open{'data-panel' => "share"}
+          %i.icon-share
+
+      -if false
+        .share-popup
+          .popup-holder
+            -u = "#{request.host_with_port}/url/#{url.id}"
+            -t = (url.title.blank? ? url.text_for_item : url.title)
+            .share-buttons
+              %a.btn.btn-facebook{:target => "_blank", :href => "http://www.facebook.com/sharer.php?u=#{u}&t=#{t}"} Facebook this post
+              %a.btn.btn-twitter{:target => "_blank", :href => "http://twitter.com/home?status=#"} Tweet this post
+              %a.btn.btn-pinterest{:href => "#"} Pin this post
+              %a.btn.btn-email{:href => "#"} Email this post
+            .total-box
+              %a{'data-panel' => "share"} Post this to a dashboard
+
+    %button.btn.button-more{'data-panel' => 'story'}
+      %span more
+
+-if false
+  %li.url{:id => url.id, 'data-url' => url.url}
+    .thumbnail{:class => url.tall_class? ? 'tall' : ''}
+      .content
+        %h3
+          %a{:href => url.url, 'data-urlid' => "##{url.id}", :target=>"_blank", :rel => 'colorbox' }
+            =raw url.title
+
+        .byline
+          -if url.favicon
+            %img.favicon{:src => url.favicon, :onerror=>"$(this).hide();", :width => 16, :height => 16}
+
+          =url.domain_name
+
+          -if current_user && current_user.admin?
+            .btn.btn-mini{'data-toggle'=>'collapse', 'data-target'=>'#debug_'+url.id} Debug
+
+            .collapse{:id => 'debug_'+url.id}
+              =link_to 'Show url', url_path(url)
+
+
+        -if !url.video_embed.blank?
+          .video
+            =url.video_embed
+
+        -elsif url.image
+          .images
+            %img{:src => url.image, :style=>"max-width: 100%;", :rel => url.title.blank? ? 'colorbox' : ''}
+
+        -if url.body
+          .description.lead
+            =truncate strip_tags(url.short_text_for_item), :length => 200
+
+        .score
+          %span.rate
+            %a.good.btn.btn-mini{href: "/urls/"+url.id+"/score?score=1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link GOOD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+              %i.icon-thumbs-up
+            %a.bad.btn.btn-mini{href: "/urls/"+url.id+"/score?score=-1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link BAD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+              %i.icon-thumbs-down
+
+            -if current_user
+              %a.btn.btn-mini{:href => "/posts/new?post[url_id]=#{url.id}&post[dashboard_id]=#{@dashboard && @dashboard.id}", :method => :post, 'data-remote' => true, 'data-disable-with' => "..."}
+                %i.icon-bullhorn
+
+          %span.sharing
+            %a.btn.btn-mini{'data-toggle'=>'hide', 'data-target'=>"##{url.id}-sharing", :title => "Share this link"}
+              %i.icon.icon-share
+
+            %div.hide{:id => "#{url.id}-sharing"}
+              .addthis_toolbox.addthis_default_style.addthis_32x32_style{'addthis:url' => "#{request.host_with_port}/url/#{url.id}", 'addthis:title' => (url.title.blank? ? url.text_for_item : url.title) }
+                %a.addthis_button_facebook
+                %a.addthis_button_twitter
+                %a.addthis_button_pinterest_share
+                %a.addthis_button_email
+
+          %a.edit{'data-bind' => 'click: toggleEdit, text: editButtonText ', :href => "#"}
+

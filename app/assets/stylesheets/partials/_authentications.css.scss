@@ -1,0 +1,16 @@
+.page_select{
+  height: 200px;
+  overflow: auto;
+  position: relative;
+
+  label.checkbox {
+    background: #efefef;
+    cursor: pointer;
+    &:hover {
+      background: #ccc;
+    }
+  }
+
+}
+
+

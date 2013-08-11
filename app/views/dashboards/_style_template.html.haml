@@ -1,0 +1,44 @@
+<style type="text/css" data-bind="template: 'styleTemplate'"></style>
+%script{:type=>"text/html", :id=>"styleTemplate"}
+  :plain
+
+    #affix {
+      display: block;
+    }
+
+    .public-page {
+      color: <%= dashboard.style.textColor() %> !important;
+      font-family: <%= dashboard.style.fontFamily() %> !important;
+      background-image: url(<%= dashboard.style.backgroundImage() %>);
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      background-color: <%= dashboard.style.backgroundColor() %>;
+    }
+
+    .public-page .thumbnail .caption, .public-page .url {
+      color: <%= dashboard.style.textColor() %> !important;
+    }
+
+    .public-page #header .navbar .navbar-inner {
+      background-color: <%= dashboard.style.headerBackgroundColor() %>;
+      background-image: url(<%= dashboard.style.headerBackgroundImage() %>/convert?h=50);
+      background-repeat: no-repeat;
+      display: block;
+      text-indent: <%= dashboard.headerTextIndent() %>;
+    }
+
+    .public-page #header h1, .public-page #header h1 a {
+      color: <%= dashboard.style.headerColor() %> !important;
+    }
+
+    .public-page .url .link-story {
+      color: <%= dashboard.style.itemHeadingsColor() %> !important;
+      font-family: <%= dashboard.style.itemHeadingsFontFamily() %> !important;
+    }
+
+    .public-page .url .thumbnail {
+      border: <%= dashboard.style.itemBorderStyle() %>;
+      border-radius: <%= dashboard.style.itemBorderRadius() %>;
+      box-shadow: <%= dashboard.style.itemBoxShadow() %>;
+      background: #fff;
+    }

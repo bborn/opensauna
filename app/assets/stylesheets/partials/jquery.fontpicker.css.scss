@@ -1,0 +1,64 @@
+
+
+.selector {
+  cursor: pointer;
+}
+  
+.fontbox {
+  text-align:left;
+  width: 175px;    
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-left: solid 1px #eee;
+  border-right: solid 1px #eee;  
+  border-bottom: solid 1px #eee;  
+  font-size: 12px;
+  color: #444444;
+  cursor: pointer;  
+  margin: 0px;
+  padding: 3px 0;
+  background-color: #1a82f7;
+  background: -moz-linear-gradient(100% 100% 90deg, #eeeeee, #ffffff);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#eeeeee));
+}
+.fontbox a {
+  width:169px;
+  display:block;
+  padding:0 3px;
+  line-height:24px;
+}
+.fontbox a:hover{
+  background-color:#FFC;  
+}
+.sample {
+  font-family:'Allan',Arial,Helvetica;
+  font-size:14px;
+  width:100%;
+  clear:both;
+  border:0; 
+  margin:10px 0 35px 0;
+}
+.sample:hover {
+  color:#999; 
+}
+.sample:focus {
+  color:#F60; 
+}
+.plus,.minus {
+  width:21px;
+  height:21px;
+  border:1px solid #eee;
+  float:left;
+  display:inline-block;
+  margin-right:5px;
+}
+.plus{
+  background:#fff url(/html5/fontpicker/images/plus.png) no-repeat top right;  
+}
+.minus{
+  background:#fff url(/html5/fontpicker/images/minus.png) no-repeat top right;  
+}
+.minus:hover,.plus:hover,.selector:hover{
+  background-position:right -21px;
+}

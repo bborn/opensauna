@@ -1,0 +1,22 @@
+%h1 Urls
+
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th URL
+      %th
+      %th
+  -@urls.each do |url|
+    %tr
+      %td{:width => "30%"}
+        %strong=link_to (url.title || 'No title'), url
+      %td{:width => "30%"}
+        =url.description
+      %td
+        = url.url
+      %td= link_to 'Show', url
+      %td= link_to 'Destroy', url, :confirm => 'Are you sure?', :method => :delete
+
+= paginate @urls, :theme => :bootstrap

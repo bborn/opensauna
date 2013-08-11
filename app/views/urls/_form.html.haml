@@ -1,0 +1,26 @@
+= bootstrap_form_for @the_url, :remote => true do |form|
+
+
+  = form.text_field :url
+  = form.text_field :title
+  = form.text_field :lede
+
+  -if @the_url.images
+
+    %ul.thumbnails
+      -@the_url.images.each do |img|
+        %li
+          .thumbnail
+            %input{:type => 'checkbox', :name => "url[cached_images][]", :value => img}
+            %img{:src => img, :width => 100}
+
+
+  = form.text_area :description
+
+  = form.submit
+
+:javascript
+  $('li').click(function(){
+    $check = $(this).find('input');
+    $check.prop('checked', !$check.attr('checked'));
+  })

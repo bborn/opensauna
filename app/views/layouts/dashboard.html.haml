@@ -1,0 +1,52 @@
+!!!
+%html{'xmlns:fb'=>"http://ogp.me/ns/fb#", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title
+      - if @the_url && !@the_url.title.blank?
+        = @the_url.title
+        –
+      = @dashboard && @dashboard.slug && @dashboard.name || "Sauna"
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    %link{:href => "/favicon.ico", :rel => "icon", :type => "image/x-icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0; maximum-scale=1.0", :name => "viewport"}/
+
+    = stylesheet_link_tag :application, :media => 'all'
+    = javascript_include_tag :application
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js", :type => "text/javascript"}
+    = javascript_include_tag :plugins
+
+    = javascript_include_tag "https://www.google.com/jsapi"
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700", :rel => "stylesheet", :type => "text/css"}/
+
+
+    :javascript
+      google.load("webfont", "1");
+
+
+    /[if lte IE 8]
+      =stylesheet_link_tag 'ie-8.css'
+
+    /[if lte IE 9]
+      =stylesheet_link_tag 'ie.css'
+
+    = yield :head
+  %body.body{:class => @body_class}
+    #page_loading=render :partial => "shared/spinner"
+
+    =yield
+
+  -if @dashboard
+    :javascript
+      $(function(){
+        window['dashboard'] = new Dashboard(#{@dashboard.to_json(:methods => :id, :only => [:style])});
+        WebFont.load({
+          google: {
+            families: window['dashboard'].fontFamilies()
+          }
+        });
+
+        ko.applyBindings(dashboard);
+      });
+
+%script{:type=>"text/javascript", :src=>"http://s7.addthis.com/js/250/addthis_widget.js"}

@@ -1,0 +1,100 @@
+- @the_url.score = 1
+- @the_url.lede = @the_url.description
+
+.page-header
+  %h4 Select an Image
+
+= bootstrap_form_for @the_url, :remote => true, :html => {:class => "form-horizontal share-form", :style => "width: 650px;"} do |form|
+
+  = hidden_field_tag :create_post, true
+
+  = form.text_field :title, :class => "span5"
+
+
+  =form.collection_select :dashboard_ids, current_user.publishable_dashboards.all, :id, :name, {:label => "Dashboard", :prompt => false}, {:class => "span5"}
+
+  =form.text_area :lede, :as => :text, :label => "Body", :class => "span6 wysihtml5", :rows => 8
+
+
+
+  %input#url_images{:type => 'hidden', :name => 'url[cached_images][]'}
+  = form.hidden_field :url, :as => :hidden
+  = form.hidden_field :score, :as => :hidden
+
+  %p
+    %small.muted
+      Show images wider than
+      %span#imgMax 250
+      px
+
+  .row
+    .span1
+      %span.pull-right 100px
+    .span4
+      #slider
+    .span1
+      %span.pull-left 600px
+
+
+
+  %br
+  %br
+  .pageImages{:style => "width: 650px; height: 300px; overflow: auto; border: 1px solid #ccc; padding: 5px"}
+    - @the_url.image_urls_from_html.each do |img|
+      %img{:src => img}
+
+  .clearfix=render :partial => "posts/social_publishing.html.haml"
+
+  .well
+    = form.submit 'Save', :disable_with => 'Saving ...'
+
+:javascript
+
+  $.rich_text_init();
+
+  $('.pageImages img').click(function(e){
+    $('.pageImages .selected').removeClass('selected');
+    $(this).addClass('selected');
+    src = $(this).attr('src')
+    $('#url_images').val(src);
+  })
+
+
+  jQuery( "#slider" ).slider({
+    value:250,
+    min: 100,
+    max: 600,
+    step: 50,
+    slide: function( event, ui ) {
+    hideImages(ui.value)
+    jQuery('#imgMax').html(ui.value)
+    }
+  });
+
+
+  function processImg(img, width){
+    jQuery(img).removeAttr("width").removeAttr("height").css({ width: "", height: "" });
+
+    pic_real_width = img.width;
+    pic_real_height = img.height;
+
+    if( (pic_real_width < width)) {
+      jQuery(img).hide();
+    } else {
+      jQuery(img).show();
+    }
+
+    jQuery(img).css({width: width + 'px'})
+  }
+
+  function hideImages(size){
+    jQuery('img').each(function(i){
+      processImg(this, size)
+    })
+  }
+
+  jQuery('img').load(function() {
+    processImg(this, 250)
+  });
+
+

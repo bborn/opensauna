@@ -1,0 +1,9 @@
+$.colorbox.close();
+
+$('.modal-header h3').html('Log in');
+$('#modal-window').modal('show');
+$('.modal-body').html('<%= escape_javascript(render('form')) %>');
+
+<%- if flash[:alert] %>
+  $('.modal-body .errors').html('<%= flash[:alert] %>');
+<%- end %>

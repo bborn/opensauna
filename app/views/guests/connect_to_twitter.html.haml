@@ -1,0 +1,11 @@
+.hero-unit
+  %h1 Let's add your Twitter stream
+
+  %p We'll connect your Twitter account so Sauna can scan your stream for interesting links.
+
+  = link_to 'Connect to Twitter', user_omniauth_authorize_path(:twitter), :class => 'btn btn-large btn-primary', 'data-no-turbolink' => true
+
+-if current_user.interests.any?
+  = link_to 'You can also skip this step.', browse_urls_path
+-else
+  = link_to 'You can also skip this step.', choose_topics_path(:guest => true)

@@ -1,0 +1,73 @@
+.page-header.clearfix
+
+  -if false
+    .btn-group.grid-list{"data-toggle" => "buttons-radio"}
+      %button.btn.active{:type => "button"}
+        %i.icon-th
+      %button.btn{:type => "button"}
+        %i.icon-th-list
+
+  =form_tag '/', :method => :get, :id => 'quick_dash_chooser' do
+    .row-fluid
+      %select.selectpicker.span6{:name => 'id', 'data-style' => "btn-select"}
+        =options_from_collection_for_select current_user.dashboards.all, :id, :name, @dashboard.id
+
+
+-if @dashboard.is_public? && @dashboard.user_id != current_user.id
+  %p.alert.alert-info
+    This is an example dashboard. Feel free to play around. When you're done, go <strong>#{link_to 'work on your own!', dashboards_path}</strong>
+
+
+#updates.alert.alert-info.alert-block.hide
+  There are new items for you to see!
+  %a{:href => '#'} Click here to update.
+
+
+
+%ul#urls.thumbnails.collection-list
+  -@refs.compact.each do |ref|
+    =render ref.url
+
+
+-if @dashboard.empty?
+  .hero-unit
+    %h1 This dashboard is empty!
+
+    %p
+      Please
+      =link_to 'add some sources to it!', inputs_dashboard_path(@dashboard)
+
+-elsif @dashboard.processing?
+  .hero-unit
+    .row
+      .span1
+        =render :partial => 'shared/spinner'
+      .span9
+        %h2 We're processing your dashboard as we speak!
+        %p
+          -if current_user.guest_email?
+            We'd like to e-mail you when it's ready, but we lack your current e-mail address.
+            %br
+            =link_to 'Please update it!', edit_user_path(current_user), :class => 'btn btn-primary', :remote => true, 'data-toggle' => 'modal', 'data-target' => '#modal-window'
+          -else
+            We'll send you an e-mail when it's ready.
+
+  -if @demo
+    .well
+      %p.lead
+        While you're waiting, why not take a look at the demo?
+        =link_to 'Yes! Why not!', dashboard_path(@demo), :class => "btn"
+  -elsif current_user && current_user.interests.any? && !@dashboard.is_recommended?
+    .well
+      %p.lead
+        While you're waiting, check out your #{link_to 'recommended items', browse_urls_path}.
+
+.story-panel{'data-no-turbolink' => true}
+.share-panel{'data-no-turbolink' => true, 'data-dashboard-id' => @dashboard.id}
+=render 'shared/scroller'
+
+:javascript
+  var dashboard_id = '#{@dashboard.to_param}';
+  window.newUrls = [];
+  window.dashboard = new Dashboard(#{@dashboard.to_json});
+

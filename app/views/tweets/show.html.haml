@@ -1,0 +1,25 @@
+.page-header
+  %h1 Tweet: #{@tweet.text}
+
+.well
+  %strong URLS:
+  =@tweet.urls.map{|u| link_to u.url, u}.join(', ').html_safe
+
+.well
+  %strong Score:
+  =@tweet.score
+  
+.well
+  =link_to "<i class='icon-thumbs-down'></i>".html_safe, score_tweet_url(@tweet, :score => -1), :class => "btn btn-danger"
+  =link_to "<i class='icon-thumbs-up'/></i>".html_safe, score_tweet_url(@tweet, :score => 1), :class => "btn btn-success"
+  =link_to "<i class='icon-refresh'/></i>".html_safe, reprocess_tweets_path(@tweet.id), :class => "btn"
+
+
+
+%p   
+  .btn{'data-toggle'=>'collapse', 'data-target'=>'#debug'} Debug
+
+#debug.collapse
+  %pre
+    = JSON.pretty_generate(JSON.parse(@tweet.to_json))
+

@@ -1,0 +1,32 @@
+-@dummy_domain = @dashboard.custom_url || "fresh.mydomain.com"
+
+= bootstrap_form_for @dashboard do |f|
+
+  = f.text_field :name
+
+  -if current_user.admin?
+    = f.text_field :custom_url
+    %p.muted
+      The custom domain is the domain you want mapped to this dashboard, i.e.
+      %code=@dummy_domain
+      %a{:href=>'#help', 'data-toggle'=>'modal'}
+        %i.icon-question-sign.icon-large
+        Help me set up my DNS
+
+    #help.modal.hide.fade
+      .modal-header
+        %button.close{:type=>"button", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} &times;
+        %h4 Help Setting Up My Custom URL
+
+      .modal-body
+        %p
+          You'll need to alter your DNS records.
+
+  -if current_user.admin?
+
+    = f.check_box :is_public, :label => "Public?"
+
+    = f.label :shared_with
+    = text_field_tag "dashboard[shared_with_emails_string]", @dashboard.shared_with_emails.join(','), :class => "span8"
+
+  = f.submit 'Save'

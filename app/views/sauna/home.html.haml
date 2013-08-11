@@ -1,0 +1,102 @@
+- @body_class = 'landing-page'
+
+#header
+  .navbar.navbar-static-top
+    .navbar-inner
+      .container
+        %strong.logo
+          %a{:href => "#"} SAUNA
+        %a.btn.login-link{:href => main_app.new_user_session_path, 'data-no-turbolink' => true}  Login
+
+#main.container
+  = render :partial => "layouts/messages"
+
+  .hero-unit
+    %h1
+      %strong Filter
+      your social streams.
+      %strong Find
+      the fresh links.
+      %strong Share
+      with your readers.
+    %a.btn.btn-info.btn-large{:href => main_app.new_guest_path, 'data-no-turbolink' => true} Try Sauna for free
+
+
+  #gallery.carousel.slide.image-gallery
+    .carousel-inner
+      .active.item
+        =background_image_tag 'old/screenshot1.png', :height => "435", :width => "838"
+        .carousel-caption
+          %h2 Filter your Social Stream
+          %p
+            Sauna pulls out headlines, images, video, and body text.
+      .item
+
+        =background_image_tag 'old/screenshot4.png', :height => "435", :width => "838"
+        .carousel-caption
+          %h2 Curate and Share
+          %p
+            Pick what you like, nix what you don't. Sauna learns from your choices.
+
+      .item
+
+        =background_image_tag 'old/screenshot2.png', :height => "435", :width => "838"
+        .carousel-caption
+          %h2 Customize Your Dashboard
+          %p
+            Complete control over the look and feel of your public-facing dashboard. Match your blog's design to the pixel.
+
+    %a.carousel-control.left{"data-slide" => "prev", :href => "#gallery"} Previous
+    %a.carousel-control.right{"data-slide" => "next", :href => "#gallery"} Next
+  .callout
+    .ico
+      %div
+        =image_tag 'ico-pencil.png'
+    %h2
+      %a{:href => "#"} Designed for Bloggers
+    %p Expand your content with curated links, images, and video.
+#footer
+  .container
+    .row.footer-row
+      .span6
+        %ul.feature-list
+          %li
+            .img-box
+              %div
+                =image_tag 'ico-links.png', :width =>50, :height => 50
+            .description
+              %h3
+                %a{:href => "#"} Find the most relevant links
+              %p Sauna scans your Twitter stream, Facebook and RSS feeds looking for links.
+          %li
+            .img-box
+              %div
+                =image_tag 'ico-images.png', :width =>50, :height => 50
+            .description
+              %h3
+                %a{:href => "#"} Extract images, video and text
+              %p Sauna automatically extracts the important text and images from each link. You don't even have to visit the site!
+          %li
+            .img-box
+              %div
+                =image_tag 'ico-learns.png', :width =>50, :height => 50
+            .description
+              %h3
+                %a{:href => "#"} Sauna learns what you like
+              %p Over time, Sauna learns what types of links you like, and hides the ones you don't.
+      .span6
+        %blockquote.quotes-block
+          %q
+            %span.holder We use Sauna to power Curbly.com's curated link board, fresh.curbly.com. In a few seconds a day, I can add a dynamic stream of supplemental content to our site.
+          .cite
+            %cite
+              %strong.name Chris Gardner
+              Managing Editor of
+              %a{:href => "#"} Curbly.com
+    .copy
+      %p
+        Open-sourced by
+        = succeed "." do
+          %a{:href => "#"} Curbly, LLC
+
+

@@ -1,0 +1,11 @@
+#scroller
+  %p#loading.bottomIndicator.alert.alert-info{'data-bind'=>'visible : loading(), text: "Loading..."'}
+  %p.bottomIndicator.alert.alert-warning{'data-bind' => 'visible : no_more_items(), text: "No more items"'}
+
+
+:javascript
+  scroller = new Scroller(#{params[:page]||1});
+  scroller.setUpInfiniteScrolling();
+  ko.applyBindings(scroller, $('#scroller')[0]);
+
+

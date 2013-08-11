@@ -1,0 +1,89 @@
+/*
+ *= require_self
+ *= require 'font-awesome'
+ *= require bootstrap-wysihtml5
+*/
+
+@import 'bootstrap';
+@import 'all';
+@import 'custom-forms';
+@import 'jquery.bootstrap-select';
+@import 'partials/spinner';
+
+[class^="icon-"], [class*=" icon-"] {
+  background: none !important;
+  vertical-align: baseline;
+}
+
+.btn [class^="icon-"], .btn [class*=" icon-"] {
+  line-height: .9em;
+}
+
+@import 'font-awesome';
+
+body {
+  padding-top: 60px;
+  &.modal-open {
+    overflow: hidden;
+  }
+}
+
+span.select-span2, .drop-span2 {
+  margin-left: 0px !important;
+}
+
+
+@import 'partials/jquery.fontpicker';
+@import 'jqueryui-bootstrap/custom-theme/jquery-ui-1.8.16.custom';
+@import 'pakunok/colorpicker';
+@import 'partials/authentications';
+@import 'partials/public';
+
+
+/*
+body {
+	padding-top: 60px;
+  &.home {
+    background: image-url('grey.png');
+    > .container {
+      padding: 1em;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    }
+  }
+}
+
+@import 'bootstrap-responsive';
+@import 'partials/urls';
+@import 'partials/dashboards';
+@import 'partials/common';
+
+
+@media (min-width: 979px) {
+  html, body {
+    height: 100%;
+  }
+  #wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 979px) {
+  @import 'colorbox-slide';
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  @import 'tablet';
+}
+
+@media (max-width: 767px) {
+ @import 'phone';
+}
+
+*/

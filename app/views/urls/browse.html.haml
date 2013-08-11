@@ -1,0 +1,38 @@
+-if @dashboard
+  =render :partial => "dashboards/style_template"
+  %style{:type => "text/css"}
+    =@dashboard.css
+
+
+-if current_user && !@topics.blank?
+  %p
+    %small.muted
+      Our picks based on your interests
+      %a.btn-link{'href'=> choose_topics_path} (see more)
+
+#dashboard
+  -if @dashboard
+    %h3#header=@dashboard.name
+
+  -if @dashboard
+    =raw @dashboard.custom_html
+
+  %ul#urls.browse.thumbnails
+    -@urls.in_groups_of(10, false).zip.each do |urls|
+      .span4
+        =render :partial => "urls/column", :locals => {:urls => urls}
+
+=render :partial => "shared/scroller"
+
+-if @dashboard
+  :javascript
+    $(function(){
+      window['dashboard'] = new Dashboard(#{@dashboard.to_json(:methods => :id)});
+      WebFont.load({
+        google: {
+          families: window['dashboard'].fontFamilies()
+        }
+      });
+
+    	ko.applyBindings(dashboard);
+    });

@@ -1,0 +1,17 @@
+%h1 Admin
+
+%ul
+  -%w(all sources feeds tweets urls).each do |type|
+    %li=link_to "Reprocess #{type}", "/reprocess?type=#{type}", 'data-no-turbolink' => 'true'
+
+  %li
+    %form{:action => "/reprocess"}
+      Reprocess dashboard:
+      =hidden_field_tag 'type', 'dashboards'
+      =select_tag 'id', options_from_collection_for_select(Dashboard.all, 'id', 'name'), :include_blank => true
+      =submit_tag 'Go', :class => 'btn'
+
+
+.well.alert.alert-danger
+  =link_to 'Purge URLS', {:controller => "admin", :action => 'purge_old_urls'}, :class => "btn btn-danger", :confirm => "Are you sure about this?"
+  .muted URLs older than 1 week with a score <= 0 will be destroyed

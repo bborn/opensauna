@@ -1,0 +1,51 @@
+
+-# Source.each {|s| s.dashboard_ids << s.dashboard_id; s.save! }
+-# Source.each {|s| s.scores[s.dashboard_id] = s.score; s.save! }
+=# Source.last.inspect
+
+-# Feed.each {|s| s.dashboard_ids << s.dashboard_id; s.save! }
+-# Feed.each {|s| s.scores[s.dashboard_id] = s.score; s.save! }
+=# Feed.last.inspect
+
+
+.page-header
+  %h1
+    =@dashboard.name
+    %small Inputs
+
+
+-if @inputs.any?
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Score
+        %th
+        %th
+
+    - @inputs.each do |input|
+      %tr{:class => input.class.name.downcase, :id => dom_id(input)}
+        %td
+          = link_to_if current_user.admin?, (input.name || input.uri), [@dashboard, input]
+        %td= input.scores[@dashboard.id.to_s]
+        %td
+          = link_to 'Remove', [@dashboard, input], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger icon', :remote => true
+
+.well
+  %h4 Add Inputs
+
+  -help = "Example: <br /><textarea style='resize:none;' rows='3' class='span6 uneditable-textarea'>@twittername  \nwww.url.com   \nwww.otherurl.com/rss.xml </textarea>"
+
+  = bootstrap_form_for @dashboard, :url => inputs_dashboard_path(@dashboard) do |f|
+    = f.text_area :inputs, :as => :text, :rows => 6, :label => 'Enter Twitter screen names or RSS feed URLs. One per line, please', :class => "span6", :help_block => help.html_safe
+
+    = f.submit 'Add Inputs'
+
+.well
+  %h4 Or import an OPML file
+
+  = bootstrap_form_for @dashboard, :url => inputs_dashboard_path(@dashboard), :html => {:multipart => true} do |f|
+
+    = f.filepicker_field :opml_to_import, button_text: "<i class='icon-upload'></i> Choose a file".html_safe, button_class: 'btn', services: "COMPUTER", :onchange => "$(this).parents('form').submit();"
+
+    = f.submit 'Import'

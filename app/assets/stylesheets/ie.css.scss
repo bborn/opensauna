@@ -1,0 +1,8 @@
+.thumbnail,
+.thumbnail *,
+.cards-list .btn { cursor: image-url('cursor-01.cur'), pointer; }
+.cards-list .btn:active {cursor: image-url('cursor-02.cur'), pointer;}
+#header .navbar-inner,
+.tooltip.in,
+.carousel-control,
+.carousel-control:hover{filter:none;}

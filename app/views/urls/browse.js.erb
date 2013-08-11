@@ -1,0 +1,12 @@
+<%- if @urls.any? %>
+
+  <%- @urls.in_groups_of(10, false).zip.each_with_index do |urls, i| %>
+    $newElems = $("<%= escape_javascript(render :partial => 'urls/column', :locals => {:urls => urls}) %>");
+    $('#urls .span4:nth-child(<%= i + 1 %>)').append($newElems);
+  <%- end %>
+
+<%- else -%>
+  scroller.no_more_items(true);
+<%- end -%>
+
+$.colorBoxIt("#urls");

@@ -1,0 +1,12 @@
+.page-header
+  %h1 Social Networks
+
+%h3= @authentication.provider.to_s.capitalize
+=bootstrap_form_for @authentication do |f|
+  =f.text_field :uid, :label => "E-mail"
+  =f.password_field :token, :label => "Password"
+
+  =f.hidden_field :provider
+
+  =f.submit
+

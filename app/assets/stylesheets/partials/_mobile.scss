@@ -1,0 +1,84 @@
+@media all and (max-width: 480px) {
+    
+  ul#urls {
+    background: none;
+    padding: 0;
+  }
+    
+  div.nav {
+  
+    #user_login_box a.twitter {
+      width: 26px;
+      span {
+        background: url(/images/auth/twitter_16.png) no-repeat 50% left;
+        text-indent: -9999px;
+        margin-left: 5px;
+      }
+    }
+  
+  
+    .ui-button {
+      margin-top: .3em;
+    }
+    
+    a.inputs {
+      display: none;
+    }
+    
+    a.sign-out {
+      width: 30px;
+      height: 30px;
+      text-indent: -999999px;
+      background: url(/images/toolbar/icon_error.png) no-repeat;
+    }
+  
+    li, .ui-button-text {
+      font-size: 10px !important;
+    }
+    
+    span.signed-in {
+      font-size: 10px;
+      text-shadow: none;
+      color: #000;
+      position: absolute;
+      top: 0;
+      width: 300px;
+      right: 0;
+      text-align: right;
+      padding-right: 20px;
+    }
+    
+    .home a {
+      width: 28px;
+      text-align: center;
+      height: 30px;
+      text-indent: -999999px;
+    }
+    
+    .ui-button {
+      height: 30px !important;
+    }
+    
+    .ui-button-text {
+      padding-top: .8em;
+    }
+    
+    .mark-read a {
+      width: 30px;
+      height: 30px;
+      text-indent: -999999px;
+      background: url(/images/toolbar/icon_download.png) no-repeat;      
+    } 
+  }
+  
+  li.url {
+    width: 410px !important;  
+  }  
+}
+
+@media all and (max-width: 320px) {
+  li.url {
+    width: 280px !important;  
+  }  
+}
+

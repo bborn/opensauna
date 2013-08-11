@@ -1,0 +1,58 @@
+
+.page-header
+  %h1
+    = @source.name
+
+    -if @source.last_fetched_at
+      %small
+        Last fetched at: #{@source.last_fetched_at.to_s(:short)}
+
+  %h4
+    #{@source.tweets.size} tweets
+
+
+  %h4
+    Scores:
+  %p=@source.scores.map{|k,v| "#{k}: #{v}" }.join('<br />')
+
+-if @tweets
+  %h3 Tweets
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Text
+        %th
+          URLs
+        %th.span2
+          When
+    %tbody
+      -@tweets.each do |t|
+        %tr
+          %td=t.text
+          %td
+            #{t.urls.map{|u| "#{link_to u.url, u} (#{u.tweets.count})".html_safe }.join(',').html_safe }
+          %td
+            =t.tweeted_at.to_s(:short)
+
+-if @urls
+  %h3 Urls
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Lede
+        %th
+          Description
+        %th.span2
+          When
+    %tbody
+      -@urls.each do |u|
+        %tr
+          %td=link_to u.url, e
+          %td
+            =u.description
+          %td
+            =u.created_at.to_s(:short)
+.well
+  = link_to 'Reprocess', reprocess_sources_path(:id => @source.id), :class => "btn"

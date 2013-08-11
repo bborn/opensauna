@@ -1,0 +1,70 @@
+.page-header.clearfix
+  =link_to 'NEW DASHBOARD', new_dashboard_path, :class => "btn btn-primary"
+  %h1 Dashboards
+
+
+-if @dashboards.any?
+  %ul.thumbnails
+    -@dashboards.each do |dashboard|
+      %li.span4{'data-href' => dashboard_path(dashboard)}
+        .thumbnail
+          =image_tag('s.png', :alt => dashboard.name , :style => "background: url(#{dashboard.cover_image}) no-repeat; background-size: cover;", :width => "298px", :height => '150px')
+          .caption
+            .title
+              %h2
+                =link_to dashboard.name, dashboard
+            .note-holder.clearfix
+              -if !dashboard.processing?
+                %p
+                  New stuff added #{time_ago_in_words(dashboard.updated_at)} ago
+              -else
+                %p
+                  Processing,
+                  %br
+                  %small.muted please check back soon.
+              %ul.links
+                -if dashboard.feeds.any?
+                  %li
+                    %a.rss{:href => "#"}
+                      RSS
+                -if dashboard.sources.any?
+                  %li
+                    %a.twitter{:href => "#"} Twitter
+
+          //%a.btn-close{:href => "#"} Close
+
+-else
+
+  .hero-unit
+    %h1 Get Started
+    %p.lead A dashboard is a collection of sources (Twitter and RSS feeds) that you want to filter for interesting links.
+
+    .span5
+      .thumbnail=image_tag 'old/screenshot1.png'
+
+    .span5
+      .centered
+        -if current_user.twitter
+          =link_to '<i class="icon-twitter icon-large"></i> Create a dashboard to monitor your Twitter stream'.html_safe, new_twitter_dashboards_path, :method => :post, :class => 'btn btn-primary btn-block', 'data-no-turbolink' => true
+        -else
+          =link_to '<i class="icon-twitter icon-large"></i> Create a dashboard from your Twitter account'.html_safe, connect_to_twitter_guest_path(current_user), :class => 'btn btn-primary btn-block', 'data-no-turbolink' => true
+
+        %br
+        %br
+        %br
+
+        -if false
+          -if current_user.facebook
+            =link_to '<i class="icon-facebook"></i> Create a dashboard to monitor your Facebook stream'.html_safe, new_fb_dashboards_path, :method => :post, :class => 'btn btn-primary btn-block', 'data-no-turbolink' => true
+          -else
+            =link_to '<i class="icon-facebook"></i> Create a dashboard based on your Facebook account'.html_safe, user_omniauth_authorize_path(:facebook), :class => 'btn btn-primary btn-block', 'data-no-turbolink' => true
+
+    .clearfix
+
+  -if @demo
+    .well
+      %p.lead
+        Since you don't have a dashboard yet, why not take a look at the demo?
+        =link_to 'Yes! Why not!', dashboard_path(@demo), :class => "btn"
+
+

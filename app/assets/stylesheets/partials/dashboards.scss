@@ -1,0 +1,18 @@
+/* Dashboards */
+
+ul.dashboards li.dashboard {
+  word-break: break-all;
+  position: relative;
+  background: #fff;
+
+  .thumbnail {
+    cursor: pointer;
+    h3 {
+      background: rgba(0,0,0,.3);
+      a:first-child {
+        text-shadow: 2px 3px 6px rgba(0, 0, 0, 1);
+        color: #ffffff;
+      }
+    }
+  }
+}

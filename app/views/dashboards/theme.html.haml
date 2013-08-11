@@ -1,0 +1,190 @@
+:javascript
+  WebFont.load({
+    google: {
+      families: [ 'Tangerine', 'Cantarell', 'Droid Sans','Allan','Allerta','Allerta Stencil','Anonymous Pro','Arimo','Arvo','Bentham','Buda','Cabin','Calligraffitti','Cantarell','Cardo','Cherry Cream Soda','Chewy','Coda','Coming Soon','Copse','Corben','Cousine','Covered By Your Grace','Crafty Girls','Crimson Text','Crushed','Cuprum','Droid Sans','Droid Sans Mono','Droid Serif','Fontdiner Swanky','GFS Didot','GFS Neohellenic','Geo','Gruppo','Hanuman','Homemade Apple','IM Fell DW Pica','IM Fell DW Pica SC','IM Fell Double Pica','IM Fell Double Pica SC','IM Fell English','IM Fell English SC','IM Fell French Canon','IM Fell French Canon SC','IM Fell Great Primer','IM Fell Great Primer SC','Inconsolata','Irish Growler','Josefin Sans','Josefin Slab','Just Another Hand','Just Me Again Down Here','Kenia','Kranky','Kristi','Lato','Lekton','Lobster','Luckiest Guy','Merriweather','Molengo','Mountains of Christmas','Neucha','Neuton','Nobile','OFL Sorts Mill Goudy TT','Old Standard TT','Orbitron','PT Sans','PT Sans Caption','PT Sans Narrow','Permanent Marker','Philosopher','Puritan','Raleway','Reenie Beanie','Rock Salt','Schoolbell','Slackey','Sniglet','Sunshiney','Syncopate','Tangerine','Tinos','Ubuntu','UnifrakturCook','UnifrakturMaguntia','Unkempt','Vibur','Vollkorn','Walter Turncoat','Yanone Kaffeesatz']
+    }
+  });
+
+.page-header
+  %h1
+    =@dashboard.name
+    %small Edit Theme
+
+
+.row
+  .span3
+
+
+    %h3
+      Edit Styles
+      .pull-right.btn.btn-primary{'data-bind' => 'click : function(){ dashboard.save() }'} Save
+
+
+    =bootstrap_form_for @dashboard do |f|
+
+      %legend General
+
+      = f.label 'Text Color'
+      %input#textColor{'data-bind'=>'color: dashboard.style.textColor', :name => "dashboard[textColor]", :type => "text"}
+
+      = f.label 'Font'
+      %input#fontFamily{:type => "text", 'data-bind' => 'font : dashboard.style.fontFamily'}
+
+      = f.label 'Background Image'
+      %input.btn{'data-bind'=> 'value : dashboard.style.backgroundImage', :type=>"filepicker", 'data-fp-apikey'=>"AQoDJHS69Sfa-fA9fEemUz", 'data-fp-option-container'=>"modal", 'data-fp-option-services'=>"COMPUTER", 'onchange' => "dashboard.style.backgroundImage(event.files[0].url)"}
+
+      .btn.btn-link{'data-bind' => 'click : function(){ dashboard.style.backgroundImage("") }, visible : dashboard.style.backgroundImage()'}
+        %i.icon-ban-circle.icon-large{'data-bind' => 'visible : dashboard.style.backgroundImage() != "none"'}
+      .muted.text-overflow{'data-bind' => 'text : dashboard.style.backgroundImage, visible : dashboard.style.backgroundImage() != "none"'}
+
+      %br
+
+      = f.label 'Background Color'
+      %input{'data-bind'=>'color: dashboard.style.backgroundColor, value : dashboard.style.backgroundColor', :name => "dashboard[backgroundColor]", :type => "text"}
+
+
+      %legend Header
+
+      = f.label 'Header Text Color'
+      %input#headingsColor{'data-bind'=>'color: dashboard.style.headerColor', :name => "dashboard[headerColor]", :type => "text"}
+
+
+      = f.label 'Header Background Color'
+      %input{'data-bind'=>'color: dashboard.style.headerBackgroundColor, value : dashboard.style.headerBackgroundColor', :name => "dashboard[headerBackgroundColor]", :type => "text"}
+
+      = f.label 'Header Image'
+      %input.btn{'data-bind'=> 'value : dashboard.style.headerBackgroundImage', :type=>"filepicker", 'data-fp-apikey'=>"AQoDJHS69Sfa-fA9fEemUz", 'data-fp-option-container'=>"modal", 'data-fp-option-services'=>"COMPUTER", 'onchange' => "dashboard.style.headerBackgroundImage(event.files[0].url)"}
+
+      .btn.btn-link{'data-bind' => 'click : function(){ dashboard.style.headerBackgroundImage("") }, visible : dashboard.style.headerBackgroundImage()'}
+        %i.icon-ban-circle.icon-large{'data-bind' => 'visible : dashboard.style.headerBackgroundImage() != "none"'}
+      .muted.text-overflow{'data-bind' => 'text : dashboard.style.headerBackgroundImage, visible : dashboard.style.headerBackgroundImage() != "none"'}
+
+
+
+      %legend Item
+
+      = f.label 'Items Heading Color'
+      %input#headingsColor{'data-bind'=>'color: dashboard.style.itemHeadingsColor', :name => "dashboard[itemHeadingsColor]", :type => "text"}
+
+      = f.label 'Font'
+      %input#itemHeadingsFontFamily{:type => "text", 'data-bind' => 'font : dashboard.style.itemHeadingsFontFamily'}
+
+
+      = f.label 'Border Style'
+      %input#itemBorderStyle{'data-bind'=>'value: dashboard.style.itemBorderStyle', :name => "dashboard[itemBorderStyle]", :type => "text"}
+
+      = f.label 'Border Radius'
+      .row
+
+        #borderRadiusSlider.span2{'data-bind' => 'jqueryui: { widget: "slider", options: {max: 20, value: dashboard.style.itemBorderRadius(), slide: function(evt,ui) { dashboard.style.itemBorderRadius(ui.value + "px"); }} }'}
+
+
+        %input#border_radius.span1{'data-bind'=>'value: dashboard.style.itemBorderRadius', :name => "dashboard[itemBorderRadius]", :type => "text", :disabled => true, :style => "width: 3em; margin-left: 10px;"}
+
+
+      = f.label 'Box Shadow'
+      %input#border_radius{'data-bind'=>'value: dashboard.style.itemBoxShadow', :name => "dashboard[itemBoxShadow]", :type => "text"}
+
+      %legend Advanced
+
+      = f.label 'Custom HTML'
+      %textarea.span3{'data-bind'=>'value: dashboard.custom_html', :name => "dashboard[custom_html]", :type => "text", :rows => 10}
+
+      = f.label 'Custom CSS'
+      %textarea.span3{'data-bind'=>'value: dashboard.css', :name => "dashboard[css]", :type => "text", :rows => 10}
+
+
+  .span9
+    %h3
+      Preview
+    %div{'data-bind'=>"template: { name: 'dashboardTemplate', data: dashboard }"}
+
+=render :partial => 'dashboards/style_template'
+
+%script{:type=>"text/html", :id=>"dashboardTemplate"}
+  .body.public-page
+    #header
+      .navbar.navbar-static-top
+        .navbar-inner
+          .container
+            %h1{'data-bind' => 'text : name'}
+
+    .container
+      %div{'data-bind' => 'html: custom_html'}
+
+      %ul#urls.thumbnails.collection-list{'data-bind'=>"template : {name: 'itemTemplate', foreach: items}"}
+
+    %style{'data-bind' => 'html: css', 'type' => 'text/css'}
+
+%script{:type=>"text/html", :id=>"itemTemplate"}
+  %li.span4.url
+    .thumbnail
+      .caption
+        .title
+          %h2
+            %a.link-story{:href => '#', 'data-bind' => 'text : title' }
+
+        .source-link
+          %a{:href => "http://example.com", :target => "_blank"}
+            %span
+              via www.example.com
+
+        .text-limiter
+          .limiter-holder
+
+            =background_image_tag('img-01.jpg', :width => "298px", :height => '150px')
+
+          %p.description
+            Short description of the item
+
+%style{:type => "text/css"}
+  :plain
+    .body > .container {
+      padding: 10px;
+      width: auto !important;
+    }
+
+    .body #header {
+      position: relative !important;
+      z-index: 0;
+    }
+
+:javascript
+  jQuery(function($){
+
+    window.dashboard = new Dashboard(#{@dashboard.to_json});
+
+
+    items = []
+    for(i=0; i < 4; i++){
+      item = new Item({
+        title : 'Item Title'
+      })
+      items.push(item)
+    }
+
+    function ViewModel(dashboard) {
+      this.dashboard = dashboard;
+    }
+
+    ko.applyBindings(ViewModel);
+
+    $( "#borderRadiusSlider" ).slider({
+        value:4,
+        min: 0,
+        max: 20,
+        step: 1,
+        slide: function( event, ui ) {
+          dashboard.style.itemBorderRadius(ui.value + "px");
+        }
+    });
+
+    $(document).ready(function() {
+
+      $('body').click(function() {
+        $('.picker').hide();
+      });
+
+    });
+
+  });

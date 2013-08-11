@@ -1,0 +1,46 @@
+.page-header
+  %h1 Social Networks
+
+%hr
+
+-if ENV['TWITTER_APP_ID']
+  %h4
+    %i.icon-twitter-sign
+    Twitter
+  -if current_user.twitter
+    Connected to Twitter
+  -else
+    %a{:href => user_omniauth_authorize_path(:twitter), :class => 'btn btn-large btn-primary', 'data-no-turbolink' => true}
+      %i.icon-twitter
+      Connect to Twitter
+  %hr
+
+-if ENV['FACEBOOK_APP_ID']
+  %h4
+    %i.icon-facebook-sign
+    Facebook
+
+  -if current_user.facebook
+    Connected to Facebook
+
+    %p
+      .btn{'data-toggle'=>'collapse', 'data-target'=>'#pages'} Manage Pages
+
+    #pages.collapse
+      %p Select which Facebook pages you'd like the option of publishing to:
+
+      -fb_auth = current_user.facebook_provider
+
+      =bootstrap_form_for [fb_auth, fb_auth.extra] do |f|
+        .control-group.row
+          .controls.page_select.span5
+            =f.collection_check_boxes :managed_page_ids, current_user.facebook_pages, :id, :name, :label => ''
+
+        .control-group.btn-box
+          .controls
+            =f.submit 'Save'
+
+  -else
+    %a{:href => user_omniauth_authorize_path(:facebook), :class => 'btn btn-large btn-primary', 'data-no-turbolink' => true}
+      %i.icon-facebook
+      Connect to Facebook

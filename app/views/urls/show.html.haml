@@ -1,0 +1,94 @@
+=#@the_url.scrape_images
+=#@the_url.add_to_dashboards
+
+.show-url
+  .page-header
+    %h1
+      =@the_url.title
+
+  .pull-right
+    = link_to 'Edit', edit_url_path(@the_url), :class => 'btn'
+    = link_to 'Delete', @the_url, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+    = link_to 'Reprocess', reprocess_urls_path(@the_url.id), :class => "btn btn-warning"
+
+  .byline.muted
+    -if @the_url.favicon
+      =image_tag @the_url.favicon
+    %a{:href => @the_url.url, :target => "_blank"}
+      %i.icon-mini.icon-external-link
+      = @the_url.url
+
+    -if @the_url.domain
+      (#{link_to @the_url.domain.name, rails_admin.show_path('domain', @the_url.domain)})
+
+  -if @the_url.tweets.any?
+    -@the_url.tweets.group_by(&:source).each do |source, group|
+      -if source
+        %strong
+          ="@#{source.name}"
+          \:
+        %ul
+          -group.each do |tweet|
+            %li=link_to tweet.text, tweet
+
+  -if @the_url.feeds.any?
+    - @the_url.feeds.each do |feed|
+      %br
+      Feed:
+      =feed.uri
+
+  -if @the_url.fb_sources.any?
+    - @the_url.fb_sources.each do |fb|
+      %br
+      Facebook:
+      =link_to fb.name, [fb.dashboard, fb]
+
+
+  .well
+    -if @the_url.lede
+      %p
+        %strong Lede:
+        =@the_url.lede
+
+    -if @the_url.long_text_for_item
+      %p
+        %strong Description:
+      = @the_url.long_text_for_item.html_safe
+
+    -unless @the_url.image_urls.blank?
+      %ul.thumbnails
+        -@the_url.image_urls.each do |img|
+          %li.span3
+            .thumbnail=image_tag img
+
+    -unless @the_url.video_embeds.empty?
+      %p.videos
+        =@the_url.video_embed.html_safe
+
+    -if @the_url.keyword_list
+      %p
+        %strong Keywords:
+        =@the_url.keyword_list.map{|keyword| link_to(keyword, browse_urls_path(:keyword => keyword))}.join(', ').html_safe
+
+    %strong Topics:
+    %ul
+      - @the_url.topics.each do |topic|
+        %li= topic.name
+
+    %p
+      %strong User Score:
+      =@the_url.score
+
+    %p
+      %strong FB score:
+      =@the_url.facebook_shares
+
+  %p
+    .btn{'data-toggle'=>'collapse', 'data-target'=>'#debug'} Debug
+
+  #debug.collapse
+    %pre
+      = JSON.pretty_generate(JSON.parse(@the_url.to_json))
+
+
+.clearfix

@@ -1,0 +1,9 @@
+=bootstrap_form_for @user, :remote => true do |f|
+
+  =f.text_field :email
+
+  =f.password_field :password, :placeholder => "Enter a new password"
+
+  =f.password_field :password_confirmation, :placeholder => "Type it again"
+  
+  =f.submit 'Save', :disable_with => "Saving..."

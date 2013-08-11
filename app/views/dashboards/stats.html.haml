@@ -1,0 +1,31 @@
+%h2 #{@dashboard.name} - Stats
+
+%p
+  Source range: #{number_with_precision(@source_range[0])} -- #{number_with_precision(@source_range[1])}
+
+%p
+  Feed range: #{number_with_precision(@feed_range[0])} -- #{number_with_precision(@feed_range[1])}
+
+%p
+  Urls processed: #{@dashboard.urls.count}
+
+-results = @dashboard.bayes_keywords
+
+-results.each do |k,v|
+  %p
+    %strong #{k.capitalize} Keywords:
+    = v.join(', ')
+
+
+-if params[:url_id]
+  %h2 URL
+  %pre
+    User:
+
+
+-#@dashboard.reclassify_url_references
+-if params[:refs]
+  %ul
+    -@dashboard.url_references.each do |ref|
+      %li=ref.inspect
+

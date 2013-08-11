@@ -1,0 +1,7 @@
+.modal.hide.fade#modal-window
+  .modal-header
+    %a.close{:href=>"#", 'data-dismiss'=>"modal"} x
+    %h3 Loading...
+  .modal-body.center
+    = render :partial => "shared/spinner.html.haml"
+  .modal-footer &nbsp;

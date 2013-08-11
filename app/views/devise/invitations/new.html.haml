@@ -1,0 +1,6 @@
+.page-header
+  %h2 Send an invite!
+
+= bootstrap_form_for resource, :as => resource_name, :url => invitation_path(resource_name) do |f|
+  = f.text_field :email, :class => 'span5', :label => "Enter a person's e-mail address:"
+  = f.submit "Send it."

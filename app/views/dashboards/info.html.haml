@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @dashboard.name
+
+%h3 Sources
+
+%ul
+  -@dashboard.sources.each do |source|
+    %li=link_to source.name, source
+
+
+= link_to 'Edit', edit_dashboard_path(@dashboard)
+\|
+= link_to 'Back', dashboards_path

@@ -1,0 +1,97 @@
+- @body_class = 'public-page'
+-if @dashboard
+  =render :partial => "dashboards/style_template"
+  -content_for :head do
+    -if @dashboard.slug
+      %meta{:property=>"og:site_name", :content=> @dashboard.slug.capitalize}
+
+  %style{:type => "text/css"}
+    =@dashboard.css
+
+-content_for :head do
+  %meta{:property=>"og:title", :content=> @post.title }
+  %meta{:property=>"og:type", :content=> 'article' }
+  %meta{:property=>"og:url", :content=> "http://#{request.host}/p/#{@post.id}" }
+
+  %meta{:property=>"og:image", :content => (@post.image || '')}
+  %meta{:property=>"og:description", :content=> truncate(strip_tags(@post.body), :length => 300) }
+
+-if @dashboard
+  #header
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          %h1
+            =link_to @dashboard.name, "http://#{request.host_with_port}"
+
+#main.container
+  %h2=raw @dashboard.custom_html
+
+  .content-area.url
+    .head-block
+      %h2
+        =link_to @post.title, @post.url.url, :class => "link-story"
+      .source-link
+        %a{:href => @post.url.url}
+          -if @post.favicon
+            =image_tag @post.favicon, :height => "15", :width => 15
+          -else
+            via
+          %span
+            =@post.url.url
+
+      .share-box
+        =#image_tag 'img-share.png'
+        %span.sharing.pull-right
+          %div{:id => "#{@post.id}-sharing"}
+            .addthis_toolbox.addthis_default_style.addthis_32x32_style{'addthis:url' => "http://#{request.host_with_port}/p/#{@post.id}", 'addthis:title' => @post.title}
+              %a.addthis_button_facebook_like{'fb:like:layout'=>"box_count"}
+              %a.addthis_button_tweet{'tw:count'=>"vertical"}
+              %a.addthis_button_pinterest_pinit{'pi:pinit:layout'=>"vertical", 'pi:pinit:media'=> @post.image }
+              %a.addthis_button_email
+
+
+    -if @post.images.any?
+      .alignright
+        -@post.images.compact.each do |img|
+          %a{:href => @post.url.url}
+            =image_tag(img, :width => 345)
+
+
+    -if @post.video_embed
+      .alignright
+        =raw @post.video_embed
+
+    =raw @post.body
+
+    .fb-plugin
+      .plugin-holder
+        <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+        <fb:comments href="http://#{request.host}/p/#{@post.id}" num_posts="10" width="500"></fb:comments>
+
+    .prev-next-block
+      .block-holder
+        .col
+          .text-box
+            -if @prev
+              %a.btn-prev{:href => "http://#{request.host_with_port}/p/#{@prev.id}", 'data-no-turbolink' => true}
+                Previous
+              %a.img-box{:href => "http://#{request.host_with_port}/p/#{@prev.id}", 'data-no-turbolink' => true}
+                -unless @prev.images.blank?
+                  =background_image_tag(@prev.images.first, :width => 100, :height => 100)
+              %a{:href => "http://#{request.host_with_port}/p/#{@prev.id}", 'data-no-turbolink' => true}
+                %strong.ttl
+
+                  =truncate @prev.title, :length => 45
+        .col
+          .text-box
+            -if @next
+              %a.btn-next{:href => "http://#{request.host_with_port}/p/#{@next.id}", 'data-no-turbolink' => true}
+                nextious
+              %a.img-box{:href => "http://#{request.host_with_port}/p/#{@next.id}", 'data-no-turbolink' => true}
+                -unless @next.images.blank?
+                  =background_image_tag(@next.images.first, :width => 100, :height => 100)
+
+              %a{:href => "http://#{request.host_with_port}/p/#{@next.id}", 'data-no-turbolink' => true}
+                %strong.ttl
+                  =truncate @next.title, :length => 45

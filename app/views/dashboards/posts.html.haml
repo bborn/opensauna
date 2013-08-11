@@ -1,0 +1,28 @@
+- @body_class = 'public-page'
+
+-if @dashboard
+  =render :partial => "dashboards/style_template"
+  %style{:type => "text/css"}
+    =@dashboard.css
+
+
+
+-if @dashboard
+  #header
+    .navbar.navbar-static-top
+      .navbar-inner
+        .container
+          %h1=@dashboard.name
+
+#main.container
+  -if @dashboard
+    =raw @dashboard.custom_html
+
+
+  -if @posts.any?
+    %ul#urls.thumbnails.collection-list
+      -@posts.each do |post|
+        =render post
+
+  =paginate @posts, :theme => "bootstrap"
+

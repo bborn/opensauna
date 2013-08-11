@@ -1,0 +1,14 @@
+- if @refs.any?
+  string = ""
+  - @refs.each do |ref|
+    string += "#{escape_javascript(render ref.url)}"
+
+  $newElems = $(string);
+  $container = $("#urls");
+
+  $container.#{params[:ids] ? 'prepend' : 'append'}($newElems).masonry( 'appended', $newElems );
+
+  -if params[:ids]
+    $('#updates').hide();
+- else
+  scroller.no_more_items(true);

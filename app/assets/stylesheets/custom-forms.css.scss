@@ -1,0 +1,95 @@
+
+/* custom forms */
+/* hide original element */
+.jcf-hidden {
+  display: block !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+/* custom checkbox styles */
+.chk-area{
+  float:left;
+  width:17px;
+  height:17px;
+  margin:3px 0 0;
+  background:image-url('sprite.png') no-repeat -32px -42px;
+}
+.chk-checked{background-position:-51px -42px;}
+.checkbox .chk-area{margin-left:-25px;}
+
+/* custom select styles */
+.select-area{
+  display:inline-block;
+  vertical-align:middle;
+  position:relative;
+  height:40px;
+  border-radius:4px;
+  -webkit-box-shadow:0 -1px 3px rgba(0, 0, 0, 0.2) inset;
+  box-shadow:0 -1px 3px rgba(0, 0, 0, 0.2) inset;
+  font-weight:600;
+  font-size:14px;
+  line-height:38px;
+  overflow:hidden;
+  background:#fff;
+  cursor:default;
+}
+.select-active{border-radius:3px 3px 0 0;}
+.select-area .center{
+  display:block;
+  height:38px;
+  margin:0 52px 0 0;
+  padding:0 0 0 10px;
+  border:1px solid #ccc;
+  border-width:1px 0 1px 1px;
+  border-radius:3px 0 0 3px;
+  overflow:hidden;
+}
+.select-active .center{
+  border-width:1px 0 1px 1px;
+  border-radius:3px 0 0 0;
+}
+.select-area .select-opener{
+  position:absolute;
+  top:0;
+  right:0;
+  width:50px;
+  height:38px;
+  border:1px solid #ccc;
+  border-radius:0 3px 3px 0;
+  background:image-url('arrow-01.png') no-repeat 50% 50%;
+}
+.select-active .select-opener{
+  width:51px;
+  border-width:1px 1px 1px 0;
+  border-radius:0 3px 0 0;
+}
+.select-options{
+  position:absolute;
+  z-index:2000;
+  overflow:hidden;
+}
+.select-options .drop-holder{
+  border: 1px solid #ccc;
+  border-width:0 1px 1px 1px;
+  border-radius:0 0 3px 3px;
+  overflow: auto;
+  height: 150px;
+  background:#fff;
+}
+.select-options ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.select-options ul a{
+  display:block;
+  padding:5px 10px;
+  text-decoration: none;
+  color:#666;
+  cursor:default;
+}
+.select-options .item-selected a{
+  text-decoration:none;
+  color:#fff;
+  background:#666;
+}

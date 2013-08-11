@@ -1,0 +1,20 @@
+.page-header
+  %h1
+    #{@dashboard.name}
+    %small Edit
+
+
+= render 'form'
+
+%ul.breadcrumb
+  %li
+    = link_to 'View this dashboard ', @dashboard
+    %span.divider /
+
+  %li
+    = link_to 'Manage Sources', inputs_dashboard_path(@dashboard)
+    %span.divider /
+
+  %li
+    = link_to 'Edit Theme', theme_dashboard_path(@dashboard)
+    %span.divider /

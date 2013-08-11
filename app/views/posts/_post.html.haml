@@ -1,0 +1,39 @@
+%li.span4.url{:id => post.id, 'data-url' => post.url.url}
+  .thumbnail
+    .caption
+      .title
+        %h2
+          %a.link-story{:href => "http://#{request.host_with_port}/p/#{post.id}", 'data-no-turbolink' => true }
+            =raw post.title
+
+      .source-link
+        %a{:href => "http://#{post.domain_name}", :target => "_blank"}
+          -if post.favicon
+            =image_tag post.favicon, :height => 15, :width => 15
+
+          %span=post.domain_name
+
+      .text-limiter
+        .limiter-holder
+
+          -if post.images.any?
+            =background_image_tag(post.images.first, :width => "298px", :height => '150px')
+
+          -if post.video_embed
+            .video
+              =raw post.video_embed
+
+          %p.description
+            =raw post.body
+
+      -if false
+        .score
+          %span.sharing
+            %a.btn.btn-mini{'data-target'=>"##{post.id}-sharing", :title => "Share this link"}
+              %i.icon.icon-share
+            %div.hide{:id => "#{post.id}-sharing"}
+              .addthis_toolbox.addthis_default_style.addthis_16x16_style{'addthis:url' => "http://#{request.host_with_port}/p/#{post.id}", 'addthis:title' => post.title}
+                %a.addthis_button_facebook_like
+                %a.addthis_button_tweet
+                %a.addthis_button_pinterest_pinit{'pi:pinit:media'=> post.image }
+                %a.addthis_button_email

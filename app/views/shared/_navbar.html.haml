@@ -1,0 +1,67 @@
+#header
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        %strong.logo
+          %a{:href => (user_signed_in? ? main_app.dashboards_path : main_app.root_path)} SAUNA
+        %ul.nav
+          -if user_signed_in?
+            =active_link_to(main_app.dashboards_path, :wrap_tag => :li, :active => :exclusive) do
+              %i.icon-th
+              Dashboards
+
+            -unless @dashboard
+              %li.dropdown
+                %a{:href => current_user.interests.any? ? main_app.browse_urls_path : choose_topics_path }
+                  %i.icon-star
+                  Recommendations
+
+
+          - if @dashboard && !@dashboard.new_record?
+            %li.dropdown.active
+              %a{:href => main_app.dashboard_path(@dashboard), 'data-toggle' => 'dropdown', :class => 'dropdown-toggle', 'data-target' => '#', 'role' => 'button'}
+                -if @dashboard.is_recommended?
+                  %i.icon-star
+                =truncate @dashboard.name, :length => 30
+                %b.icon-caret-down
+              %ul.dropdown-menu{:role => 'menu'}
+
+                -if !controller.action_name.eql?('show')
+                  %li= link_to 'View dashboard', main_app.dashboard_path(@dashboard)
+                  %li.divider
+
+                %li= link_to 'Edit Dashboard', main_app.edit_dashboard_path(@dashboard)
+                -unless @dashboard.is_recommended?
+                  %li= link_to 'Manage sources', main_app.inputs_dashboard_path(@dashboard)
+                  %li= link_to 'Bookmarklet', main_app.bookmarklet_dashboard_path(@dashboard)
+
+                -if @dashboard.custom_url
+                  %li.divider
+                  %li= link_to 'Custom Theme', main_app.theme_dashboard_path(@dashboard), 'data-no-turbolink' => true
+
+                  %li= link_to 'View public site', "http://#{@dashboard.slug}.#{ENV['BASE_HOST_NAME']}", :target => '_blank'
+
+                -if current_user && current_user.admin?
+                  %li.divider
+                  %li.dropdown-submenu
+                    %a{:href => "#"} Admin
+                    %ul.dropdown-menu
+                      %li= link_to 'Reprocess dashboard', main_app.reprocess_dashboards_path(@dashboard.id)
+                      %li= link_to 'Inputs', main_app.inputs_dashboard_path(@dashboard.id)
+                      %li= link_to 'Stats', main_app.stats_dashboard_path(@dashboard.id)
+
+        - if user_signed_in?
+          %ul.nav.account.pull-right
+            %li
+              %a.dropdown-toggle{:href => "#", 'data-target'=> '#', 'data-toggle' => 'dropdown', 'role' => 'button'}
+                %i.icon-user
+                =current_user.email_or_guest_name
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  = link_to "Profile", main_app.edit_user_path(current_user)
+                %li
+                  = link_to "Interests", main_app.choose_topics_path
+                %li= link_to 'Social Accounts', main_app.authentications_path
+
+                %li= link_to 'Sign out', main_app.destroy_user_session_path, :class => 'sign-out'
+

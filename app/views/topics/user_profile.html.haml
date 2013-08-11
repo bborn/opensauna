@@ -1,0 +1,33 @@
+.page-header
+  %h1
+    #{@user.full_name}'s Interest Profile
+
+
+%h2 Topics
+
+=raw @user.interests.map{|t| link_to t.name, browse_urls_path(:topic => t.name) }.to_sentence
+
+
+-results = @user.bayes_keywords
+
+-results.each do |k,v|
+  %p
+    %strong #{k.capitalize} Keywords:
+    = v.map{|k| k['word'] }.join(', ')
+
+
+-if params[:url_id]
+  -url = Url.new :title => "this is some spammy stuff"
+  %h2 URL
+  %pre
+    Classification:
+    = @user.classify( url ).inspect
+
+-if params[:scores]
+  %h2 Scores
+  %ul
+    -@scores.each do |s|
+      %li
+        =s.url_id
+        \,
+        =s.score

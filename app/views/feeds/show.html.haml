@@ -1,0 +1,46 @@
+
+.page-header
+  %h1
+    = @feed.name
+
+    -if @feed.last_fetched_at
+      %small
+        Last fetched at: #{@feed.last_fetched_at.to_s(:short)}
+
+  %h4
+    =@feed.uri
+
+  %h4
+    #{@feed.urls.size} urls
+
+  %h4
+    Scores:
+  %p=raw @feed.scores.map{|k,v| "#{k}: #{v}" }.join('<br />')
+
+-if @urls
+  %h3 Urls
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Lede
+        %th
+          Description
+        %th.span2
+          When
+    %tbody
+      -@urls.each do |u|
+        %tr
+          %td=link_to u.url, u
+          %td
+            =u.description
+          %td
+            =u.created_at.to_s(:short)
+
+=paginate @urls, :theme => "bootstrap"
+
+
+
+
+.well
+  = link_to 'Reprocess', reprocess_feeds_path(:id => @feed.id), :class => "btn"

@@ -1,0 +1,23 @@
+.page-header
+  %h1 Tweets
+
+-if @tweets
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Text
+        %th
+          URLs
+        %th.span2
+          When
+    %tbody
+      -@tweets.each do |t|
+        %tr
+          %td.break-all.span4=t.text
+          %td.break-all.span4
+            #{t.urls.map{|u| "#{link_to u.url, u} (#{u.tweets.count})".html_safe }.join("<br />").html_safe }
+          %td
+            =t.tweeted_at.to_s(:short)
+
+= paginate @tweets, :theme => :bootstrap

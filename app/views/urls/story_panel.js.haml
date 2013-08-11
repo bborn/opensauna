@@ -1,0 +1,50 @@
+.panel-area.url{:id => @the_url.id}
+  %a.btn-close{:href => "#"} Close
+
+  %h2
+    %a.link-story{:href => @the_url.url, :target => "_blank"}
+      =@the_url.title
+
+  .info-holder.clearfix
+
+    .source-link
+      %a{:href => "http://#{@the_url.domain_name}", :target => "_blank"}
+        -if @the_url.favicon
+          %img.favicon{:src => @the_url.favicon, :onerror=>"$(this).hide();", :width => 16, :height => 16}
+
+        %span=@the_url.domain_name
+
+    .btn-group.action-buttons
+      %a.btn{href: "/urls/#{@the_url.id}/score?score=1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link GOOD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+        %i.icon-thumbs-up
+      %a.btn{href: "/urls/#{@the_url.id}/score?score=-1#{@dashboard && "&dashboard_id=#{@dashboard.id}" }", 'data-remote' => true, :title => "Rate this link BAD", 'data-rating-text' => 'Good!', 'data-disable-with' => "..."}
+        %i.icon-thumbs-down
+      %button.btn.open{'data-panel' => "share"}
+        %i.icon-share
+
+  .story-content
+    .content-holder
+      -if @the_url.image
+        =image_tag('s_470x282.png', :style => "background: url(#{@the_url.image}) no-repeat; background-size: cover;", :width => "470px", :height => '282px')
+
+      -unless @the_url.video_embeds.empty?
+        %p.videos
+          =@the_url.video_embed.html_safe
+
+      = raw @the_url.long_text_for_item
+
+
+
+  / .prev-next-nav
+  /   .col
+  /     .holder
+  /       %a.btn-prev{:href => "#"} Previous
+  /       %span A low tech way to lost and found
+  /   .col
+  /     .holder
+  /       %a.btn-next{:href => "#"} Next
+  /       %span A low tech way to lost and found
+
+
+
+

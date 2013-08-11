@@ -1,0 +1,47 @@
+
+
+.span4 {
+  width: 100%;
+}
+
+ul#urls li.url, #cboxContent .content {
+
+  .images {
+    max-width: 100% !important;
+
+    img {
+      width: 40%;
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 12px;
+    }
+  }
+
+
+  .description {
+    max-width: 100%;
+  }
+
+
+}
+
+.meta, .score {
+  display: block;
+  opacity: 1;
+}
+
+
+#cboxLoadedContent {
+  border-bottom: 1px solid #ccc;
+
+  .score {
+    top: 0;
+    padding-top: 5px;
+  }
+
+  &:before {
+    content: '';
+  }
+
+
+}

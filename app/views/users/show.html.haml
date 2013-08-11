@@ -1,0 +1,7 @@
+.page-header
+  %h1 Profile
+
+.well
+  %h3.text-overflow= @user.email
+
+  =link_to 'Edit', edit_user_path(@user), :class => 'btn btn-primary'

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+		<% if @the_url && @the_url.title %>
+			<%= @the_url.title %>
+			– 
+		<% end %>
+  	<%= @dashboard && @dashboard.slug && @dashboard.slug.capitalize || "Sauna" %>
+  </title>
+	<link rel="shortcut icon" href="/favicon.ico" /> 
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" /> 
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0; maximum-scale=1.0" />
+
+	<%= stylesheet_link_tag :application, :media => 'all' %>
+	<%= stylesheet_link_tag 'partials/new_url', :media => 'all' %>	
+
+
+	<%= javascript_include_tag :application %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js">
+	</script>	
+  
+  <%= csrf_meta_tag %>
+	
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-80911-19']);
+	  _gaq.push(['_setDomainName', 'none']);
+	  _gaq.push(['_setAllowLinker', true]);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+	<%= yield :head %>
+
+</head>
+<body>
+  <%= render :partial => "shared/modal.html.haml"	 %>
+	<div id="wrap">
+		<div class="container">
+			<%= render :partial => "layouts/messages.html.haml"    %>
+		
+			<%= yield %>		
+
+		</div>
+		
+	</div>
+	
+	<style type="text/css" media="screen">
+		#cboxLoadedContent:before {
+	    content: none;
+	  }		
+	</style>
+		
+</body>
+</html>

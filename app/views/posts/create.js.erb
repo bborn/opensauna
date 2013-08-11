@@ -1,0 +1,9 @@
+
+<%- if @post.valid? %>
+  $('.modal-body').html('<%= escape_javascript render(:partial => "posts/created_popup", :object => @post, :as => "post") %>');
+  $('.modal-header').html("<h3>Saved!</h3>").show();
+  $('.modal-footer').html("<a class='btn btn-' href='#' data-dismiss='modal'>Close</a>").show();
+  $('#modal-window').modal('show');
+<%- else %>
+  alert('<%=raw escape_javascript(@post.errors.full_messages.to_sentence) %>')
+<%- end %>

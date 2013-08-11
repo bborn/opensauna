@@ -1,0 +1,38 @@
+-if current_user.has_social_networks?
+  .control-group
+    %span.control-label
+      Publish to
+    .controls#social_publishing
+      .checks-holder.clearfix
+        .span3
+          -if current_user.facebook
+            -current_user.facebook_provider.extra.managed_pages.each do |p|
+              %label.checkbox
+                = check_box_tag 'post[publish_facebook_page_ids][]', p['id']
+                %span.label-text
+                  %i.icon-facebook
+                  = p['name']
+
+
+          -if current_user.twitter
+            %label.checkbox
+              = check_box_tag 'post[publish_to_twitter]'
+
+              %span.label-text
+                %i.icon-twitter
+                @#{current_user.twitter_provider.extra.screen_name}
+
+
+
+        .span2#publish_times{:style => "display: none;"}
+          %span.label-text When:
+          = select_tag 'post[publish_at_interval]', options_for_select(Post.publish_at_options, current_user.post_publish_at_default)
+
+
+  :javascript
+    jQuery("#social_publishing input").change(function(){
+      jQuery('#publish_times').show();
+    });
+
+
+

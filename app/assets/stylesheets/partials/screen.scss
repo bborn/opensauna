@@ -1,0 +1,113 @@
+user_login_boxbody { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  padding: 10px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+a.button:hover, a.ui-button:hover { color: #313131 !important; }
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.clear{
+  clear: both;  
+}
+
+@import "spinner";
+
+@import "errors";
+@import "urls";
+
+@import "nav";
+
+@import "popup";
+
+@import "notifications";
+
+/* Pagination */
+
+nav.pagination {margin: 20px -10px -10px -10px; background: #ccc; padding: 10px 5px 10px 5px}
+nav.pagination a { color: #fff; text-decoration: none !important;}
+
+
+/* Signup form */
+
+form#user_new {
+ width: 400px;
+}
+ 
+ 
+/* Jquery icons */
+.ui-icon-sauna { background-image: url(/images/sauna.png) !important; }
+
+#user_login_box a.twitter span {
+  background: url(/images/auth/twitter_16.png) no-repeat 0px 40%;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+
+
+/* Inputs list */
+
+table.inputs td:last-child {
+  padding-right: 40px;
+}
+table.inputs tr.feed td:last-child {
+  background: url(/images/icons/rss.png) no-repeat right;  
+}
+table.inputs tr.source td:last-child {
+  background: url(/images/icons/twitter.png) no-repeat right;  
+}
+
+
+/* Header */
+h1.header {
+  margin-top: .5em;
+  text-transform: capitalize;
+  span {
+    float:right;
+    font-size: .4em;
+    font-weight: normal;
+  }
+}
+
+
+@import "dashboards";
+@import "mobile";
+@import "new_url";
+
+
+/* Sharing */
+.sharing {
+  margin-bottom: 5px;
+}
+.addthis_toolbox {
+  opacity: .4;
+  -webkit-transition: all .3s ease-out;
+     -moz-transition: all .3s ease-out;
+       -o-transition: all .3s ease-out;
+          transition: all .3s ease-out;  
+  
+  a {
+    background: none;
+  }
+}
+li.url:hover .addthis_toolbox {
+  opacity: 1;
+}
+
+
+

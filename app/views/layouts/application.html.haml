@@ -1,0 +1,44 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title
+      - if @the_url && @the_url.title
+        = @the_url.title
+        –
+      = @dashboard && @dashboard.slug && @dashboard.name.capitalize || "Sauna"
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    %link{:href => "/favicon.ico", :rel => "icon", :type => "image/x-icon"}/
+    %meta{:content => "width=device-width, initial-scale=1.0; maximum-scale=1.0", :name => "viewport"}/
+
+    = csrf_meta_tag
+
+    = stylesheet_link_tag :application, :media => 'all', 'data-turbolinks-track' => true
+
+    = filepicker_js_include_tag
+
+    = javascript_include_tag :application, 'data-turbolinks-track' => true
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js", :type => "text/javascript"}
+    = javascript_include_tag :plugins, 'data-turbolinks-track' => true
+
+    = javascript_include_tag "https://www.google.com/jsapi"
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700", :rel => "stylesheet", :type => "text/css"}/
+    :javascript
+        google.load("webfont", "1");
+
+    /[if lte IE 8]
+      =stylesheet_link_tag 'ie-8.css'
+
+    /[if lte IE 9]
+      =stylesheet_link_tag 'ie.css'
+
+    = yield :head
+  %body{:class => controller.controller_name}
+    #page_loading=render :partial => "shared/spinner"
+    =render :partial => "shared/modal"
+    =render :partial => "shared/navbar"
+
+
+    #main.container
+      = render :partial => "layouts/messages"
+      = render :template => 'layouts/single'

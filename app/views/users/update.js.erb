@@ -1,0 +1,10 @@
+<%- if @user.errors.any? %>
+  $('.modal-body').html('<%= escape_javascript(render('form')) %>');
+<%- else %>
+  $('.messages .alert').alert('close');
+  $.bootstrapGrowl("Thanks! Your profile was updated.", { type: 'success' })
+  $('#user_login_box a .name').html('<%= @user.email_or_guest_name %>')
+  $('#modal-window').modal('hide');
+  $('.modal-body').html('');
+  $('.navbar').load('/sauna/navbar')
+<%- end %>

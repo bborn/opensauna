@@ -1,0 +1,21 @@
+<%- if params[:q] %>
+
+  $('#topics').html("<%= escape_javascript(render :partial => 'topic', :collection => @topics) %>")
+
+<%- else %>
+
+  $('ul li .active').toggleClass('active')
+
+  <%- @user.interests.each do |t| %>
+
+    $('ul li#topic-<%= t.id %> .btn').toggleClass('active');
+
+  <%- end %>
+
+  <%- if @user.interests.any? %>
+    $(".well").show();
+  <%- else %>
+    $(".well").hide();
+  <% end %>
+
+<%- end %>

@@ -1,0 +1,73 @@
+%script{:type=>"text/html", :id=>"urlTemplate"}
+  %li.url.span3{'data-bind' => "attr: {id : _id, 'data-url' : url}, css: classification_class()"}
+    .thumbnail
+      -if current_user
+        %form.edit{'method'=>"put", 'data-remote' => 'true', 'data-bind' => 'visible: isEditing, submit: save, attr : {action : "/urls/" + _id }'}
+          %input{'data-bind'=>'value: title', :name => "url[title]", :type => "text"}
+
+          %textarea{'data-bind' => 'value: text_for_item', :name => "url[lede]", :rows => 5}
+
+          %input{:type => 'hidden', :name => 'url[images][]'}
+
+          %ul.editImages.thumbnails{'data-bind'=>'template: { name: "editImgTemplate", foreach: images }, visible: function(){images.size > 0}'}
+
+          %input.btn.btn-primary{:type=>"submit", :value => "Save"}
+
+      .content{'data-bind' => 'visible: isNotEditing'}
+        %h3
+          %a{'data-bind' => "attr : {href : url, 'data-urlid' : '#'+_id}, html: (title() === '' ? text_for_item : title)", :target=>"_blank", :rel => 'colorbox' }
+
+        .byline.muted
+          / ko if: favicon
+          %img.favicon{:onerror=>"$(this).hide();", :width => 16, :height => 16, 'data-bind' => 'if : favicon, attr : {src : favicon, alt : base_url }'}
+          / /ko
+          %span{'data-bind' => 'text :base_url'}
+
+        / ko if: video_embed
+        %div
+          .video{'data-bind' => 'html: video_embed'}
+        / /ko
+
+        / ko ifnot: video_embed
+        .image-wrapper
+          %div.images{'data-bind'=>'template: { name: "imgTemplate", foreach: images}'}
+        / /ko
+
+        .description.clearfix
+          %p.short.lead{'data-bind' => "html: (title() === '' ? '' : text_for_item)"}
+          .long{'data-bind' => "html: long_text_for_item"}
+
+      -if params[:dashboard_slug]
+        .sharing{:style => "max-width: 100%; left: 5px;"}
+          .addthis_toolbox.addthis_default_style.addthis_16x16_style{'data-bind' => 'attr : {"addthis:url" : permalink, "addthis:title" : (title || text_for_item) }'}
+            %a.addthis_button_facebook_like
+            %a.addthis_button_tweet
+            //%a.permalink{:href => "${permalink}", :target => '_blank'}
+            <iframe 'data-bind'='attr : {src : "http://www.facebook.com/plugins/comments.php?href="+permalink+"&permalink=1"}' scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:130px; height:16px;" allowTransparency="true"></iframe>
+
+      -if current_user
+        /ko if: source_name
+        .meta.muted{'data-bind' => 'text : "via " + source_name '}
+          %a.muted{'data-bind' => 'attr : {href : "/urls/"+_id}, text : formatted_updated_at', :target=>"_blank"}
+        / /ko
+
+        .score
+          -if @dashboard
+            %span.number.badge{'data-bind' => "text: score, css: score_class()"}
+            %span.rate
+              %a.good.btn.btn-mini{'data-bind'=>'click: rateGood, attr : {href : "/urls/"+_id+"/score?score=1&dashboard_id=#{@dashboard.id}" }'}
+                %i.icon-thumbs-up
+              %a.bad.btn.btn-mini{'data-bind'=>'click: rateBad, attr : {href : "/urls/"+_id+"/score?score=-1&dashboard_id=#{@dashboard.id}" }'}
+                %i.icon-thumbs-down
+          %a.edit{'data-bind' => 'click: toggleEdit, text: editButtonText ', :href => "#"}
+
+
+
+%script#imgTemplate{:type=>"text/html"}
+  %img{'data-bind' => 'attr: {src : $data}', :style=>"max-width: 100%; max-height: 350px"}
+
+%script#editImgTemplate{:type=>"text/html"}
+  %li{'data-bind' => 'click: function(){$parent.images.remove($data)}'}
+    .thumbnail
+      %input{:type => 'checkbox', :name => "url[images][]", 'data-bind' => 'value: $data, checked : $parent.images'}
+      %img{'data-bind' => 'attr : {src : $data}', :width => 100}

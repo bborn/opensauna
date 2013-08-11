@@ -1,0 +1,17 @@
+<h2>
+	Sign in
+</h2>
+
+<%= bootstrap_form_for(resource, :url => session_path(resource_name)) do |f| %>
+
+	<%= f.text_field :email %>
+	<%= f.password_field :password %>	
+	<% if devise_mapping.rememberable? -%>
+		<%= f.check_box :remember_me %>
+	<% end -%>
+		
+	<%= f.submit "Sign in" %>
+
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

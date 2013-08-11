@@ -1,0 +1,7 @@
+<p>Hi<%= @resource.email %>!</p>
+
+<p>Welcome to Sauna</p>
+
+<p>You can confirm your account by clicking on the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

@@ -1,0 +1,4 @@
+%li.topic.span3{:id => "topic-#{topic.id}"}
+  %a.btn.tooltip-item{"data-toggle" => "button", :type => "button", :href => choose_topics_path(:topic_id => topic.id, :guest => params[:guest]), 'data-remote' => true, 'data-method' => :post, 'data-disable-with' => " Saving ... ", :class => @user.interests.include?(topic) ? 'active' : ''}
+    %em= topic.name
+    %span.check

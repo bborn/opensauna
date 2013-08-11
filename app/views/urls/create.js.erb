@@ -1,0 +1,13 @@
+<%- if @the_url.new_record? || @post && @post.new_record? -%>
+  $('.modal-body').html("<h3>Sorry!</h3><p><%= resource.errors.full_messages.to_sentence %><%= @post && @post.errors.full_messages.to_sentence %></p>");
+  $('.modal-header').hide();
+<%- else -%>
+  $('form').hide();
+  $('.modal-header').html("<h3>Saved!</h3>").show();
+  $('.modal-body').html("<h3>Thanks!</h3><p>The URL was added. <%= escape_javascript(link_to('Keep browsing', resource.url))%>.</p>");
+  <%- if @post %>
+    $('.modal-body').html('<%= escape_javascript render(:partial => "posts/created_popup", :object => @post, :as => "post") %>');
+  <%- end %>
+<%- end %>
+
+$('#modal-window').modal('show');

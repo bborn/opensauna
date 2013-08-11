@@ -29,7 +29,8 @@ Prior to installing, you'll need [mongodb](http://www.mongodb.org/) and [Redis](
 
 4. `bundle install`
 5. `rake db:migrate`
-6. `bundle exec foreman start -f Procfile.local`. (The app should now be running on `localhost:5000`)
+6. `bundle exec foreman start -f Procfile.local`. (The app should now be
+running on `localhost:5000`)
 
 
 Deploying to Heroku
@@ -38,7 +39,9 @@ Deploying to Heroku
 To Deploy to heroku:
 
 1. Create a new Heroku app
-2. Set the required variables from your local `.env` file on Heroku (using `heroku config:set`). You can also use the [heroku-config](https://github.com/ddollar/heroku-config) plugin to sync local and remote config vars.
+2. Set the required variables from your local `.env` file on Heroku
+(using `heroku config:set`). You can also use the
+[heroku-config](https://github.com/ddollar/heroku-config) plugin to sync local and remote config vars.
 3. Provision the required addons:
 
   - [rediscloud](https://addons.heroku.com/rediscloud)
@@ -46,4 +49,22 @@ To Deploy to heroku:
   - [memcachier](https://addons.heroku.com/memcachier)
   - [sendgrid](https://addons.heroku.com/sendgrid)
 
-4. Push your app to Heroku (`git push heroku`) and migrate (`heroku run rake db:migrate`)
+4. Push your app to Heroku (`git push heroku`) and migrate (`heroku run rake
+db:migrate`)
+
+Running Workers on Heroku
+-------------------------
+
+Look in the `Procfile` to see which processes are defined. You can leave
+workers running for each of these, but a better approach is to use
+autoscaling. Try [Hirefire](http://hirefire.io/),
+[AdeptScale](https://addons.heroku.com/adept-scale) or the
+[Autoscaler](https://github.com/JustinLove/autoscaler) gem.
+
+Admin User
+----------
+Set the boolean `admin` attribute on a user to give him access to the
+admin backend (`/admin`) and Sidekiq UI (`/sidekiq`). On Heroku, you can
+use the Heroku console (`heroku run console`) to do this.
+
+
