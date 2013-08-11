@@ -19,7 +19,7 @@ Sauna runs on Ruby 1.9.x with Rails 3.2.
 
 Prior to installing, you'll need [mongodb](http://www.mongodb.org/) and [Redis](http://redis.io/) installed on your machine.
 
-1. Clone the repository
+1. Clone the repository: `git clone https://github.com/bborn/opensauna.git`
 2. Copy `sample.env` to `.env`. Don't add `.env` to the git repo.
 3. Fill in the required values in your `.env` file.
 
