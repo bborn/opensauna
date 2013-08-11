@@ -1,0 +1,5 @@
+unicorn: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+log: tail -f -n 0 ./log/development.log
+sidekiq: bundle exec sidekiq -c 1 -q urls,5 -q default -q critical -q dashboard_urls
+redis: redis-server
+mongo: mongod

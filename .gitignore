@@ -14,3 +14,8 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+public/uploads
+bin
+bundle
+.rbenv-version
+.env
