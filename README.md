@@ -3,10 +3,10 @@ opensauna
 
 Required Heroku addons:
 
-rediscloud
-mongohq
-memcachier
-sendgrid
+- rediscloud
+- mongohq
+- memcachier
+- sendgrid
 
 To Deploy to heroku:
 
