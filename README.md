@@ -65,6 +65,6 @@ Admin User
 ----------
 Set the boolean `admin` attribute to `true` on a user to give him access to the
 admin backend (`/admin`) and Sidekiq UI (`/sidekiq`). On Heroku, you can
-use the Heroku console (`heroku run console`) to do this.
+use `heroku run console` to do this.
 
 
