@@ -1,5 +1,5 @@
-OpenSauna
-=========
+Sauna
+=====
 
 Filter your social streams. Find the fresh links. Share with your readers.
 
