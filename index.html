@@ -31,37 +31,83 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="sauna" class="anchor" href="#sauna"><span class="octicon octicon-link"></span></a>Sauna</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h5>
+<a name="filter-your-social-streams-find-the-fresh-links-share-with-your-readers" class="anchor" href="#filter-your-social-streams-find-the-fresh-links-share-with-your-readers"><span class="octicon octicon-link"></span></a>Filter your social streams. Find the fresh links. Share with your readers.</h5>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>Sauna is a social news aggregator and curation tool.
+This is the open-source version of <a href="http://sauna.io">Sauna.io</a>.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>It scans your Twitter stream and RSS feeds looking for links.
+And it automatically extracts the important text and images from each link.
+Over time, Sauna learns what types of links you like, and hides the ones you don't.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>Sauna also allows you to curate the links you like with your friends, fans,
+or readers. Create a customized linkstream site (like <a href="http://bruno.sauna.io">bruno.sauna.io</a>). Built-in social sharing on Twitter and Facebook, with scheduled posting.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Sauna was created by Bruno Bornsztein for <a href="http://www.curbly.com">Curbly</a>.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><em>Note: I'm still trying to smooth out the install process. Please help
+me out by going through the steps and telling me what doesn't work!</em></p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>Sauna runs on Ruby 1.9.x with Rails 3.2.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Prior to installing, you'll need <a href="http://www.mongodb.org/">mongodb</a> and <a href="http://redis.io/">Redis</a> installed on your machine.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/bborn/opensauna.git</code>
+</li>
+<li>Copy <code>sample.env</code> to <code>.env</code>. Don't add <code>.env</code> to the git repo.</li>
+<li>
+<p>Fill in the required values in your <code>.env</code> file.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p><code>SECRET_TOKEN</code>  - use <code>rake secret</code> to generate a token</p>
+
+<p><code>BASE_HOST_NAME</code> - for Heroku, this will be <code>yourappname.herokuapp.com</code>, unless you add a custom domain, in which case it'll be <code>customdomain.com</code> (without <code>www</code>)</p>
+</li>
+<li><p><code>bundle install</code></p></li>
+<li><p><code>rake db:migrate</code></p></li>
+<li><p><code>bundle exec foreman start -f Procfile.local</code>. (The app should now be
+running on <code>localhost:5000</code>)</p></li>
+</ol><h2>
+<a name="deploying-to-heroku" class="anchor" href="#deploying-to-heroku"><span class="octicon octicon-link"></span></a>Deploying to Heroku</h2>
+
+<p>To Deploy to heroku:</p>
+
+<ol>
+<li>Create a new Heroku app</li>
+<li>Set the required variables from your local <code>.env</code> file on Heroku
+(using <code>heroku config:set</code>). You can also use the
+<a href="https://github.com/ddollar/heroku-config">heroku-config</a> plugin to sync local and remote config vars.</li>
+<li>Provision the required addons:</li>
+</ol><ul>
+<li><a href="https://addons.heroku.com/rediscloud">rediscloud</a></li>
+<li><a href="https://addons.heroku.com/mongohq">mongohq</a></li>
+<li><a href="https://addons.heroku.com/memcachier">memcachier</a></li>
+<li><a href="https://addons.heroku.com/sendgrid">sendgrid</a></li>
+</ul><ol>
+<li>Push your app to Heroku (<code>git push heroku</code>) and migrate (<code>heroku run rake
+db:migrate</code>)</li>
+</ol><h2>
+<a name="running-workers-on-heroku" class="anchor" href="#running-workers-on-heroku"><span class="octicon octicon-link"></span></a>Running Workers on Heroku</h2>
+
+<p>Look in the <code>Procfile</code> to see which processes are defined. You can leave
+workers running for each of these, but a better approach is to use
+autoscaling. Try <a href="http://hirefire.io/">Hirefire</a>,
+<a href="https://addons.heroku.com/adept-scale">AdeptScale</a> or the
+<a href="https://github.com/JustinLove/autoscaler">Autoscaler</a> gem.</p>
+
+<h2>
+<a name="admin-user" class="anchor" href="#admin-user"><span class="octicon octicon-link"></span></a>Admin User</h2>
+
+<p>Set the boolean <code>admin</code> attribute to <code>true</code> on a user to give him access to the
+admin backend (<code>/admin</code>) and Sidekiq UI (<code>/sidekiq</code>). On Heroku, you can
+use <code>heroku run console</code> to do this.</p>
       </section>
     </div>
 
