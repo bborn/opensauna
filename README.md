@@ -11,9 +11,11 @@ Over time, Sauna learns what types of links you like, and hides the ones you don
 
 Sauna also allows you to curate the links you like with your friends, fans, or readers. Create a customized linkstream site (like [bruno.sauna.io](http://bruno.sauna.io)). Built-in social sharing on Twitter and Facebook, with scheduled posting.
 
-
 Installation
 ------------
+
+*Note: I'm still trying to smooth out the install process. Please help
+me out by going through the steps and telling me what doesn't work!*
 
 Sauna runs on Ruby 1.9.x with Rails 3.2.
 
