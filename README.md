@@ -1,15 +1,19 @@
 Sauna
 =====
-
-Filter your social streams. Find the fresh links. Share with your readers.
+##### Filter your social streams. Find the fresh links. Share with your readers.
 
 Sauna is a social news aggregator and curation tool.
+This is the open-source version of [Sauna.io](http://sauna.io).
 
 It scans your Twitter stream and RSS feeds looking for links.
 And it automatically extracts the important text and images from each link.
 Over time, Sauna learns what types of links you like, and hides the ones you don't.
 
-Sauna also allows you to curate the links you like with your friends, fans, or readers. Create a customized linkstream site (like [bruno.sauna.io](http://bruno.sauna.io)). Built-in social sharing on Twitter and Facebook, with scheduled posting.
+Sauna also allows you to curate the links you like with your friends, fans,
+or readers. Create a customized linkstream site (like [bruno.sauna.io](http://bruno.sauna.io)). Built-in social sharing on Twitter and Facebook, with scheduled posting.
+
+Sauna was created by Bruno Bornsztein for [Curbly](http://www.curbly.com).
+
 
 Installation
 ------------
