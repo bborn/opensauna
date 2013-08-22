@@ -1,36 +1,4 @@
 GIT
-  remote: git://github.com/bborn/extractula.git
-  revision: b078adf68d34a471d693b175b19fc89cc3a4fcf5
-  specs:
-    extractula (0.0.11)
-      domainatrix
-      loofah (>= 0.4.2)
-      nokogiri (> 0.0.0)
-      typhoeus
-
-GIT
-  remote: git://github.com/bborn/pismo.git
-  revision: 782fdd2e05d2c761980dcdb8e7a6f0e80a0e24d9
-  specs:
-    pismo (0.7.3)
-      awesome_print
-      chronic
-      fast-stemmer
-      fastimage (>= 1)
-      htmlentities
-      nokogiri
-      phrasie (>= 0.1.4)
-      sanitize
-
-GIT
-  remote: git://github.com/feedbin/opml_saw.git
-  revision: 61d8c2dd3d46e9cae38178754469dd9da7c8bd6a
-  branch: master
-  specs:
-    opml_saw (0.0.2)
-      nokogiri
-
-GIT
   remote: https://github.com/bborn/ankusa.git
   revision: 614d2f99684d68bf8a8d11dc40b64558c1f928d0
   specs:
@@ -46,12 +14,44 @@ GIT
       nokogiri (>= 1.3.3)
 
 GIT
+  remote: https://github.com/bborn/extractula.git
+  revision: b078adf68d34a471d693b175b19fc89cc3a4fcf5
+  specs:
+    extractula (0.0.11)
+      domainatrix
+      loofah (>= 0.4.2)
+      nokogiri (> 0.0.0)
+      typhoeus
+
+GIT
+  remote: https://github.com/bborn/pismo.git
+  revision: 782fdd2e05d2c761980dcdb8e7a6f0e80a0e24d9
+  specs:
+    pismo (0.7.3)
+      awesome_print
+      chronic
+      fast-stemmer
+      fastimage (>= 1)
+      htmlentities
+      nokogiri
+      phrasie (>= 0.1.4)
+      sanitize
+
+GIT
   remote: https://github.com/bborn/postrank-uri.git
   revision: 37ce2eca2be8de9fd29268349a7c9ce933875eca
   specs:
     postrank-uri (1.0.15)
       addressable (>= 2.2.3)
       domainatrix
+      nokogiri
+
+GIT
+  remote: https://github.com/feedbin/opml_saw.git
+  revision: 61d8c2dd3d46e9cae38178754469dd9da7c8bd6a
+  branch: master
+  specs:
+    opml_saw (0.0.2)
       nokogiri
 
 GEM
@@ -142,7 +142,7 @@ GEM
     dotenv-rails (0.8.0)
       dotenv (= 0.8.0)
     erubis (2.7.0)
-    ethon (0.5.12)
+    ethon (0.6.0)
       ffi (>= 1.3.0)
       mime-types (~> 1.18)
     excon (0.25.3)
@@ -432,8 +432,8 @@ GEM
       faraday (~> 0.8)
       multi_json (~> 1.3)
       simple_oauth (~> 0.1.6)
-    typhoeus (0.6.3)
-      ethon (~> 0.5.11)
+    typhoeus (0.6.4)
+      ethon (~> 0.6.0)
     tzinfo (0.3.37)
     uglifier (2.1.2)
       execjs (>= 0.3.0)

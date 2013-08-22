@@ -16,15 +16,9 @@ gem "active_link_to", "~> 1.0.0"
 gem "mongoid", "~> 3.0.3"
 gem 'forgery', '0.5.0'
 
-if ENV['BUNDLE_ENV'] == "dev"
-  gem 'pismo', :path => '~/Projects/rails3.1/pismo'
-  gem 'ankusa', :path => '~/Projects/rails3.1/ankusa'
-  gem 'calais', :path => "~/Projects/rails3.1/calais"
-else
-  gem 'pismo', :git => 'git://github.com/bborn/pismo.git'
-  gem 'ankusa', :git => 'https://github.com/bborn/ankusa.git'
-  gem 'calais', :git => 'https://github.com/bborn/calais.git'
-end
+gem 'pismo', :git => 'https://github.com/bborn/pismo.git'
+gem 'ankusa', :git => 'https://github.com/bborn/ankusa.git'
+gem 'calais', :git => 'https://github.com/bborn/calais.git'
 
 gem 'mongo'
 gem 'state_machine'
@@ -64,7 +58,7 @@ group :assets do
 end
 
 gem 'twitter', '4.3.0'
-gem 'extractula', :git => 'git://github.com/bborn/extractula.git'
+gem 'extractula', :git => 'https://github.com/bborn/extractula.git'
 
 gem 'tactful_tokenizer'
 
@@ -87,7 +81,7 @@ gem "kiqstand"
 
 gem 'kaminari'
 gem 'mechanize'
-gem 'opml_saw', :git => "git://github.com/feedbin/opml_saw.git", :branch => "master"
+gem 'opml_saw', :git => "https://github.com/feedbin/opml_saw.git", :branch => "master"
 
 
 gem "feedzirra", '0.2.0.rc2'
