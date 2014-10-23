@@ -42,7 +42,10 @@ running on `localhost:5000`)
 Deploying to Heroku
 -------------------
 
-To Deploy to heroku:
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+To Deploy Manually to heroku:
 
 1. Create a new Heroku app
 2. Set the required variables from your local `.env` file on Heroku
