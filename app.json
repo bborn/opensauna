@@ -1,0 +1,70 @@
+{
+  "name": "OpenSauna",
+  "description": "Filter your social streams. Find the fresh links. Share with your readers.",
+  "repository": "https://github.com/bborn/opensauna",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "env": {
+    "RAILS_ENV": "production",
+    "SECRET_TOKEN": {
+      "description": "A secret",
+      "generator": "secret",
+      "required": true
+    },
+    "BASE_HOST_NAME": {
+      "description": "The domain this install will be hosted on (i.e. yourappname.herokuapp.com)",
+      "value": "",
+      "required": false
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "description": "AWS access key id",
+      "value": "",
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "AWS secret access key",
+      "value": "",
+      "required": true
+    },
+    "AWS_ASSETS_BUCKET": {
+      "description": "AWS bucket name where assets will be stored",
+      "value": "",
+      "required": true
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "description": "Twitter API consumer key (for getting tweets). See https://apps.twitter.com/app/",
+      "value": "",
+      "required": true
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "Twitter API consumer secret",
+      "value": "",
+      "required": true
+    },
+    "TWITTER_OAUTH_TOKEN": {
+      "description": "Twitter OAuth Token",
+      "value": "",
+      "required": true
+    },
+    "TWITTER_OAUTH_SECRET": {
+      "description": "Twitter OAuth Secret",
+      "value": "",
+      "required": true
+    },
+    "FILEPICKER_API_KEY": {
+      "description": "Filepicker API key",
+      "value": "",
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "mongohq",
+    "sendgrid",
+    "memcachier",
+    "newrelic:stark",
+    "pgbackups",
+    "rediscloud"
+  ]
+}
